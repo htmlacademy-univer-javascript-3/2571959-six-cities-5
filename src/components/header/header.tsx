@@ -1,12 +1,25 @@
 ﻿import cn from 'classnames';
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../routing/routes';
+import { UserMenu } from './user-menu';
+import { AuthStatus } from '../../types/auth-status';
 
-export function Header() {
+interface HeaderProps {
+  authStatus?: AuthStatus;
+  showUserMenu?: boolean;
+}
+
+export function Header({ authStatus = AuthStatus.AUTH, showUserMenu = true }: HeaderProps) {
+  const isAuth = authStatus === AuthStatus.AUTH;
   return (
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <a className={cn('header__logo-link', 'header__logo-link--active')}>
+            <Link
+              to={AppRoute.ROOT}
+              className={cn('header__logo-link', 'header__logo-link--active')}
+            >
               <img
                 className="header__logo"
                 src="img/logo.svg"
@@ -14,37 +27,9 @@ export function Header() {
                 width={81}
                 height={41}
               />
-            </a>
+            </Link>
           </div>
-          <nav className="header__nav">
-            <ul className="header__nav-list">
-              <li className={cn('header__nav-item', 'user')}>
-                <a
-                  className={cn(
-                    'header__nav-link',
-                    'header__nav-link--profile'
-                  )}
-                  href="#"
-                >
-                  <div
-                    className={cn(
-                      'header__avatar-wrapper',
-                      'user__avatar-wrapper'
-                    )}
-                  />
-                  <span className={cn('header__user-name', 'user__name')}>
-                    Oliver.conner@gmail.com
-                  </span>
-                  <span className="header__favorite-count">3</span>
-                </a>
-              </li>
-              <li className="header__nav-item">
-                <a className="header__nav-link" href="#">
-                  <span className="header__signout">Sign out</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
+          {showUserMenu && <UserMenu isAuthorized={isAuth} />}
         </div>
       </div>
     </header>

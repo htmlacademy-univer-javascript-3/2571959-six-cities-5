@@ -1,8 +1,11 @@
-﻿import { Offer } from '../../types/offer';
+﻿import { Link } from 'react-router-dom';
+import { Offer } from '../../types/offer';
 import { BookmarkButton } from '../bookmark/bookmark-button';
 import { StarRating } from '../star-rating/star-rating';
 import { Mark } from './mark';
 import cn from 'classnames';
+import { buildRoute } from '../../utils/url';
+import { AppRoute } from '../../routing/routes';
 
 interface PlaceCardProps {
   offer: Offer;
@@ -11,11 +14,12 @@ interface PlaceCardProps {
 }
 
 export function PlaceCard({ offer, width, height }: PlaceCardProps) {
+  const offerRoute = buildRoute(AppRoute.OFFER, { id: offer.id });
   return (
     <article className={cn('cities__card', 'place-card')}>
       {offer.isPremium && <Mark />}
       <div className={cn('cities__image-wrapper', 'place-card__image-wrapper')}>
-        <a href="#">
+        <Link to={offerRoute}>
           <img
             className="place-card__image"
             src={offer.previewImage}
@@ -23,7 +27,7 @@ export function PlaceCard({ offer, width, height }: PlaceCardProps) {
             height={height}
             alt="Place image"
           />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -35,7 +39,7 @@ export function PlaceCard({ offer, width, height }: PlaceCardProps) {
         </div>
         <StarRating rating={offer.rating} />
         <h2 className="place-card__name">
-          <a href="#">{offer.title}</a>
+          <Link to={offerRoute}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>
