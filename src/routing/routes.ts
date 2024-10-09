@@ -5,4 +5,4 @@
   ROOT: '/',
 } as const;
 
-export type AppRouteEnum = typeof AppRoute[keyof typeof AppRoute]
+export type AppRouteEnum = (typeof AppRoute)[keyof typeof AppRoute];

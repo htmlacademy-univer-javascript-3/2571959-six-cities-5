@@ -52,6 +52,7 @@ export function Places({ cardsCount, selectedCity }: PlacesProps) {
               // eslint-disable-next-line react/no-array-index-key
               key={i}
               offer={{
+                id: '12312',
                 title: 'Beautiful & luxurious apartment at great location',
                 price: 120,
                 type: 'Apartment',
