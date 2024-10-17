@@ -1,12 +1,14 @@
 ﻿import cn from 'classnames';
-import { PlaceCard } from '../card/place-card';
+import { PlaceCardCities } from '../card/place-card';
+import { useState } from 'react';
+import { PlacesProps } from './types';
 
-interface PlacesProps {
-  cardsCount: number;
+interface CityPlacesProps extends PlacesProps {
   selectedCity: string;
 }
 
-export function Places({ cardsCount, selectedCity }: PlacesProps) {
+export function Places({ selectedCity, offers }: CityPlacesProps) {
+  const [activeCard, setActiveCard] = useState<string | null>(null);
   return (
     <>
       <section className={cn('cities__places', 'places')}>
@@ -47,23 +49,8 @@ export function Places({ cardsCount, selectedCity }: PlacesProps) {
         <div
           className={cn('cities__places-list', 'places__list', 'tabs__content')}
         >
-          {[...Array<number>(cardsCount)].map((_, i) => (
-            <PlaceCard
-              // eslint-disable-next-line react/no-array-index-key
-              key={i}
-              offer={{
-                id: '12312',
-                title: 'Beautiful & luxurious apartment at great location',
-                price: 120,
-                type: 'Apartment',
-                rating: 4.8,
-                isPremium: true,
-                isFavorite: false,
-                previewImage: 'img/apartment-01.jpg',
-              }}
-              width={260}
-              height={200}
-            />
+          {offers.map((x) => (
+            <PlaceCardCities key={x.id} offer={x} onHover={setActiveCard} />
           ))}
         </div>
       </section>
