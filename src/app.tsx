@@ -15,7 +15,7 @@ export function App() {
       <Routes>
         <Route path={AppRoute.ROOT} element={<MainPage offers={offers} />} />
         <Route path={AppRoute.LOGIN} element={<LoginPage />} />
-        <Route path={AppRoute.OFFER} element={<OfferPage />} />
+        <Route path={AppRoute.OFFER} element={<OfferPage authStatus={AuthStatus.AUTH} />} />
         <Route element={<PrivateRoute authStatus={AuthStatus.AUTH} />}>
           <Route path={AppRoute.FAVORITES} element={<FavoritesPage offers={offers} />} />
         </Route>

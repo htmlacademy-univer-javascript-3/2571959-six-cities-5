@@ -1,7 +1,7 @@
 ﻿import { Link } from 'react-router-dom';
 import { OfferCardData } from '../../types/offer';
-import { BookmarkButton } from '../bookmark/bookmark-button';
-import { StarRating } from '../star-rating/star-rating';
+import { PlaceCardBookmarkButton } from '../bookmark/bookmark-button';
+import { PlaceCardStarRating } from '../star-rating/star-rating';
 import { Mark } from './mark';
 import cn from 'classnames';
 import { buildRoute } from '../../utils/url';
@@ -51,9 +51,9 @@ export function PlaceCard({
             <b className="place-card__price-value">€{offer.price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          {<BookmarkButton isFavorite={offer.isFavorite} />}
+          <PlaceCardBookmarkButton isFavorite={offer.isFavorite} />
         </div>
-        <StarRating rating={offer.rating} />
+        <PlaceCardStarRating rating={offer.rating} />
         <h2 className="place-card__name">
           <Link to={offerRoute}>{offer.title}</Link>
         </h2>

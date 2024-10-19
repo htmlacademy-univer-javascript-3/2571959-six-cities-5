@@ -1,5 +1,5 @@
 ﻿import { City } from './city';
-import { Host } from './host';
+import { User } from './user';
 import { MapPoint } from './map-point';
 
 export type OfferCardData = {
@@ -19,7 +19,7 @@ export type Offer = OfferCardData & {
   description: string;
   images: string[];
   goods: string[];
-  host: Host;
+  host: User;
   bedrooms: number;
   maxAdults: number;
 }
