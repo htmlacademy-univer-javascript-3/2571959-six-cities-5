@@ -1,24 +1,40 @@
 ﻿import { Link } from 'react-router-dom';
-import { Offer } from '../../types/offer';
-import { BookmarkButton } from '../bookmark/bookmark-button';
-import { StarRating } from '../star-rating/star-rating';
+import { OfferCardData } from '../../types/offer';
+import { PlaceCardBookmarkButton } from '../bookmark/bookmark-button';
+import { PlaceCardStarRating } from '../star-rating/star-rating';
 import { Mark } from './mark';
 import cn from 'classnames';
 import { buildRoute } from '../../utils/url';
 import { AppRoute } from '../../routing/routes';
 
 interface PlaceCardProps {
-  offer: Offer;
+  offer: OfferCardData;
   width: number;
   height: number;
+  mainClassName: string;
+  imageWrapperClassName: string;
+  infoClassName?: string;
+  onHover?: (id: string | null) => void;
 }
 
-export function PlaceCard({ offer, width, height }: PlaceCardProps) {
+export function PlaceCard({
+  offer,
+  width,
+  height,
+  mainClassName,
+  imageWrapperClassName,
+  infoClassName,
+  onHover,
+}: PlaceCardProps) {
   const offerRoute = buildRoute(AppRoute.OFFER, { id: offer.id });
   return (
-    <article className={cn('cities__card', 'place-card')}>
+    <article
+      className={cn(mainClassName, 'place-card')}
+      onMouseEnter={() => onHover?.(offer.id)}
+      onMouseLeave={() => onHover?.(null)}
+    >
       {offer.isPremium && <Mark />}
-      <div className={cn('cities__image-wrapper', 'place-card__image-wrapper')}>
+      <div className={cn('place-card__image-wrapper', imageWrapperClassName)}>
         <Link to={offerRoute}>
           <img
             className="place-card__image"
@@ -29,20 +45,49 @@ export function PlaceCard({ offer, width, height }: PlaceCardProps) {
           />
         </Link>
       </div>
-      <div className="place-card__info">
+      <div className={cn('place-card__info', infoClassName)}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">€{offer.price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          {<BookmarkButton isFavorite={offer.isFavorite} />}
+          <PlaceCardBookmarkButton isFavorite={offer.isFavorite} />
         </div>
-        <StarRating rating={offer.rating} />
+        <PlaceCardStarRating rating={offer.rating} />
         <h2 className="place-card__name">
           <Link to={offerRoute}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>
     </article>
+  );
+}
+
+export function PlaceCardFavorites({ offer }: Pick<PlaceCardProps, 'offer'>) {
+  return (
+    <PlaceCard
+      offer={offer}
+      width={150}
+      height={110}
+      mainClassName="favorites__card"
+      imageWrapperClassName="favorites__image-wrapper"
+      infoClassName="favorites__card-info"
+    />
+  );
+}
+
+export function PlaceCardCities({
+  offer,
+  onHover,
+}: Pick<PlaceCardProps, 'offer' | 'onHover'>) {
+  return (
+    <PlaceCard
+      offer={offer}
+      width={260}
+      height={200}
+      onHover={onHover}
+      mainClassName="cities__card"
+      imageWrapperClassName="cities__image-wrapper"
+    />
   );
 }

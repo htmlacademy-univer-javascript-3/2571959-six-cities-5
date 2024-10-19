@@ -4,9 +4,10 @@ import { AppRoute } from '../../routing/routes';
 
 interface TabsProps {
   selectedCity: string;
+  onCityChange: (city: string) => void;
 }
 
-export function Tabs({ selectedCity }: TabsProps) {
+export function Tabs({ selectedCity, onCityChange }: TabsProps) {
   const locations = [
     'Paris',
     'Cologne',
@@ -27,6 +28,7 @@ export function Tabs({ selectedCity }: TabsProps) {
                   'tabs__item--active': city === selectedCity,
                 })}
                 to={AppRoute.ROOT}
+                onClick={() => onCityChange(city)}
               >
                 <span>{city}</span>
               </Link>
