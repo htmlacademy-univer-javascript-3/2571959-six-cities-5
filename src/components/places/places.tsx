@@ -2,6 +2,7 @@
 import { PlaceCardCities } from '../card/place-card';
 import { useState } from 'react';
 import { PlacesProps } from './types';
+import { Map } from '../map/map';
 
 interface CityPlacesProps extends PlacesProps {
   selectedCity: string;
@@ -9,6 +10,10 @@ interface CityPlacesProps extends PlacesProps {
 
 export function Places({ selectedCity, offers }: CityPlacesProps) {
   const [activeCard, setActiveCard] = useState<string | null>(null);
+  const points = offers.map((x) => ({
+    name: x.id,
+    location: x.location,
+  }));
   return (
     <>
       <section className={cn('cities__places', 'places')}>
@@ -55,7 +60,12 @@ export function Places({ selectedCity, offers }: CityPlacesProps) {
         </div>
       </section>
       <div className="cities__right-section">
-        <section className="cities__map map" />
+        <Map
+          city={{...points[0], location: {...points[0].location, zoom: 12}}}
+          cities={points}
+          selectedCity={points.find((x) => x.name === activeCard)}
+          className="cities__map map"
+        />
       </div>
     </>
   );
