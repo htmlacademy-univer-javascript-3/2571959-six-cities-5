@@ -19,7 +19,7 @@ interface OfferPageProps {
 export function OfferPage({ authStatus }: OfferPageProps) {
   const { id: offerId } = useParams<{ id?: string }>();
   const offer = offers.find((x) => x.id === offerId)!;
-  const reviews = offerId ? mockReviews[offerId] : [];
+  const reviews = mockReviews[offerId ?? ''] ?? [];
   return (
     <div className="page">
       <Header />
