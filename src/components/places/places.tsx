@@ -18,7 +18,7 @@ export function Places({ selectedCity, offers }: CityPlacesProps) {
     <>
       <section className={cn('cities__places', 'places')}>
         <h2 className="visually-hidden">Places</h2>
-        <b className="places__found">312 places to stay in {selectedCity}</b>
+        <b className="places__found">{offers.length} places to stay in {selectedCity}</b>
         <form className="places__sorting" action="#" method="get">
           <span className="places__sorting-caption">Sort by</span>
           <span className="places__sorting-type" tabIndex={0}>

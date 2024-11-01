@@ -2,7 +2,6 @@
 import { Header } from '../../components/header/header';
 import { buildRoute } from '../../utils/url';
 import { AppRoute } from '../../routing/routes';
-import { offers } from '../../mocks/offers';
 import { OfferBookmarkButton } from '../../components/bookmark/bookmark-button';
 import { OfferStarRating } from '../../components/star-rating/star-rating';
 import { OfferMark } from '../../components/card/mark';
@@ -11,6 +10,8 @@ import { AuthStatus } from '../../types/auth-status';
 import { Reviews } from './reviews';
 import { reviews as mockReviews } from '../../mocks/reviews';
 import { ReviewForm } from './review-form';
+import { useAppSelector } from '../../hooks/redux';
+import { NotFoundPage } from '../not-found/not-found-page';
 
 interface OfferPageProps {
   authStatus: AuthStatus;
@@ -18,8 +19,15 @@ interface OfferPageProps {
 
 export function OfferPage({ authStatus }: OfferPageProps) {
   const { id: offerId } = useParams<{ id?: string }>();
-  const offer = offers.find((x) => x.id === offerId)!;
+  const offer = useAppSelector((state) =>
+    state.offers.find((x) => x.id === offerId)
+  );
   const reviews = mockReviews[offerId ?? ''] ?? [];
+
+  if (!offer) {
+    return <NotFoundPage />;
+  }
+
   return (
     <div className="page">
       <Header />
