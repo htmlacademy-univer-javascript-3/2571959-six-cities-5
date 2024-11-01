@@ -3,17 +3,20 @@ import { Header } from '../../components/header/header';
 import { Tabs } from '../../components/tabs/tabs';
 import { Places } from '../../components/places/places';
 import { PlacesEmpty } from '../../components/places/places-empty';
-import { OfferCardData } from '../../types/offer';
-import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { selectCurrentOffers } from '../../store/selectors';
+import { setCity } from '../../store/action';
 
-interface MainPageProps {
-  offers: OfferCardData[];
-}
-
-export function MainPage({ offers }: MainPageProps) {
-  const [selectedCity, setSelectedCity] = useState('Paris');
-  offers = offers.filter((x) => x.city.name === selectedCity);
+export function MainPage() {
+  const dispatch = useAppDispatch();
+  const offers = useAppSelector(selectCurrentOffers);
   const isEmpty = offers.length === 0;
+  const selectedCity = useAppSelector((state) => state.city);
+
+  const handleCityChange = (city: string) => {
+    dispatch(setCity(city));
+  };
+
   return (
     <div className={cn('page', 'page--gray', 'page--main')}>
       <Header />
@@ -23,7 +26,7 @@ export function MainPage({ offers }: MainPageProps) {
         })}
       >
         <h1 className="visually-hidden">Cities</h1>
-        <Tabs selectedCity={selectedCity} onCityChange={setSelectedCity} />
+        <Tabs selectedCity={selectedCity} onCityChange={handleCityChange} />
         <div className="cities">
           <div
             className={cn('cities__places-container', 'container', {
