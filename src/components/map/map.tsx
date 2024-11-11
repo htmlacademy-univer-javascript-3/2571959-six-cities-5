@@ -6,7 +6,7 @@ import { City } from '../../types/city';
 
 type MapProps = {
   city: City;
-  cities: City[];
+  places: City[];
   selectedCity: City | undefined;
   className: string;
 };
@@ -24,7 +24,7 @@ const currentCustomIcon = new Icon({
 });
 
 export function Map(props: MapProps): JSX.Element {
-  const { city, cities, selectedCity, className } = props;
+  const { city, places, selectedCity, className } = props;
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
@@ -32,7 +32,7 @@ export function Map(props: MapProps): JSX.Element {
   useEffect(() => {
     if (map) {
       const markerLayer = layerGroup().addTo(map);
-      cities.forEach((point) => {
+      places.forEach((point) => {
         const marker = new Marker({
           lat: point.location.latitude,
           lng: point.location.longitude,
@@ -51,7 +51,7 @@ export function Map(props: MapProps): JSX.Element {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, cities, selectedCity]);
+  }, [map, places, selectedCity]);
 
-  return <div style={{ height: '100%' }} className={className} ref={mapRef} />;
+  return <div className={className} ref={mapRef} />;
 }

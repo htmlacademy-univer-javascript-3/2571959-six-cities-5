@@ -18,3 +18,7 @@ export const sorting: Record<
 };
 
 export const sortingKeys = Object.keys(sortingOrders);
+
+export const DEFAULT_CITY = 'Amsterdam';
+
+export const DEFAULT_ZOOM = 12;
