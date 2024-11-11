@@ -3,9 +3,9 @@ import { PlaceCardCities } from '../card/place-card';
 import { useState } from 'react';
 import { PlacesProps } from './types';
 import { Map } from '../map/map';
-import { sortingOrder, sorting } from '../../utils/constants';
+import { sortingOrder, sorting, DEFAULT_ZOOM } from '../../utils/constants';
 import { SortingOrder } from '../sorting-order/sorting-order';
-
+import styles from './places.module.css';
 
 interface CityPlacesProps extends PlacesProps {
   selectedCity: string;
@@ -36,10 +36,13 @@ export function Places({ selectedCity, offers }: CityPlacesProps) {
       </section>
       <div className="cities__right-section">
         <Map
-          city={{ ...points[0], location: { ...points[0].location, zoom: 12 } }}
-          cities={points}
+          city={{
+            ...points[0],
+            location: { ...points[0].location, zoom: DEFAULT_ZOOM },
+          }}
+          places={points}
           selectedCity={points.find((x) => x.name === activeCard)}
-          className="cities__map map"
+          className={cn('map', styles['cities__map'])}
         />
       </div>
     </>

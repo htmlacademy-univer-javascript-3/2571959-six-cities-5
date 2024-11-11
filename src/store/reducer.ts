@@ -1,10 +1,13 @@
 ﻿import { createReducer } from '@reduxjs/toolkit';
 import { offers } from '../mocks/offers';
 import { setCity, setOffers } from './action';
+import { reviews } from '../mocks/reviews';
+import { DEFAULT_CITY } from '../utils/constants';
 
 const initialState = {
-  city: 'Amsterdam',
+  city: DEFAULT_CITY,
   offers,
+  reviews,
 };
 
 export const citiesReducer = createReducer(initialState, (builder) => {

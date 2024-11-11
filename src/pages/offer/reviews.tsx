@@ -13,7 +13,7 @@ export function Reviews({ reviews }: ReviewsProps) {
       </h2>
       <ul className="reviews__list">
         {reviews
-          .sort(
+          .toSorted(
             (x, y) => new Date(y.date).getTime() - new Date(x.date).getTime()
           )
           .slice(0, 10)

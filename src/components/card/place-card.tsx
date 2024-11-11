@@ -91,3 +91,20 @@ export function PlaceCardCities({
     />
   );
 }
+
+export function PlaceCardNear({
+  offer,
+  onHover,
+}: Pick<PlaceCardProps, 'offer' | 'onHover'>) {
+  return (
+    <PlaceCard
+      offer={offer}
+      width={260}
+      height={200}
+      onHover={onHover}
+      mainClassName="near-places__card"
+      imageWrapperClassName="near-places__image-wrapper"
+    />
+  );
+}
+
