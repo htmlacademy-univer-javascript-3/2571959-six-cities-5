@@ -14,9 +14,9 @@ import { selectCurrentOffers } from '../../store/selectors';
 import { PlaceCardNear } from '../../components/card/place-card';
 import { Map } from '../../components/map/map';
 import { useEffect } from 'react';
-import { setCity } from '../../store/action';
 import { DEFAULT_CITY, DEFAULT_ZOOM } from '../../utils/constants';
 import styles from './offer-page.module.css';
+import { setCity } from '../../store/offers/offersSlice';
 
 interface OfferPageProps {
   authStatus: AuthStatus;
@@ -26,14 +26,14 @@ export function OfferPage({ authStatus }: OfferPageProps) {
   const dispatch = useAppDispatch();
   const { id: offerId } = useParams<{ id?: string }>();
   const offer = useAppSelector((state) =>
-    state.offers.find((x) => x.id === offerId)
+    state.offers.offers.find((x) => x.id === offerId)
   );
 
   useEffect(() => {
     dispatch(setCity(offer?.city.name ?? DEFAULT_CITY));
   });
 
-  const reviews = useAppSelector((state) => state.reviews[offerId ?? ''] ?? []);
+  const reviews = useAppSelector((state) => state.offers.reviews[offerId ?? ''] ?? []);
   const nearOffers = useAppSelector((state) =>
     selectCurrentOffers(state)
       .filter((x) => x.id !== offer?.id)

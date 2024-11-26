@@ -5,13 +5,13 @@ import { Places } from '../../components/places/places';
 import { PlacesEmpty } from '../../components/places/places-empty';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { selectCurrentOffers } from '../../store/selectors';
-import { setCity } from '../../store/action';
+import { setCity } from '../../store/offers/offersSlice';
 
 export function MainPage() {
   const dispatch = useAppDispatch();
   const offers = useAppSelector(selectCurrentOffers);
   const isEmpty = offers.length === 0;
-  const selectedCity = useAppSelector((state) => state.city);
+  const selectedCity = useAppSelector((state) => state.offers.city);
 
   const handleCityChange = (city: string) => {
     dispatch(setCity(city));
