@@ -1,4 +1,4 @@
-﻿import { useParams } from 'react-router-dom';
+﻿//import { useParams } from 'react-router-dom';
 import { Header } from '../../components/header/header';
 import { OfferBookmarkButton } from '../../components/bookmark/bookmark-button';
 import { OfferStarRating } from '../../components/star-rating/star-rating';
@@ -24,16 +24,14 @@ interface OfferPageProps {
 
 export function OfferPage({ authStatus }: OfferPageProps) {
   const dispatch = useAppDispatch();
-  const { id: offerId } = useParams<{ id?: string }>();
-  const offer = useAppSelector((state) =>
-    state.offers.offers.find((x) => x.id === offerId)
-  );
+  //const { id: offerId } = useParams<{ id?: string }>();
+  const offer = useAppSelector((state) => state.offers.offer);
 
   useEffect(() => {
     dispatch(setCity(offer?.city.name ?? DEFAULT_CITY));
   });
 
-  const reviews = useAppSelector((state) => state.offers.reviews[offerId ?? ''] ?? []);
+  const reviews = useAppSelector((state) => state.offers.reviews ?? []);
   const nearOffers = useAppSelector((state) =>
     selectCurrentOffers(state)
       .filter((x) => x.id !== offer?.id)
