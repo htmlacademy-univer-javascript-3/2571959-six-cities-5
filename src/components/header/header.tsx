@@ -1,15 +1,16 @@
 ﻿import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../routing/routes';
-import { UserMenu } from './user-menu';
 import { AuthStatus } from '../../types/auth-status';
+import { useAppSelector } from '../../hooks/redux';
+import { UserData, UserDataNoAuth } from './user-data';
 
 interface HeaderProps {
-  authStatus?: AuthStatus;
   showUserMenu?: boolean;
 }
 
-export function Header({ authStatus = AuthStatus.AUTH, showUserMenu = true }: HeaderProps) {
+export function Header({ showUserMenu = true }: HeaderProps) {
+  const { user, authStatus } = useAppSelector((state) => state.auth);
   const isAuth = authStatus === AuthStatus.AUTH;
   return (
     <header className="header">
@@ -29,7 +30,15 @@ export function Header({ authStatus = AuthStatus.AUTH, showUserMenu = true }: He
               />
             </Link>
           </div>
-          {showUserMenu && <UserMenu isAuthorized={isAuth} />}
+          {showUserMenu && (
+            <nav className="header__nav">
+              {isAuth ? (
+                <UserData email={user!.email} favoriteCount={3} />
+              ) : (
+                <UserDataNoAuth />
+              )}
+            </nav>
+          )}
         </div>
       </div>
     </header>

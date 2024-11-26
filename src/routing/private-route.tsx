@@ -2,12 +2,10 @@
 import { AppRoute } from './routes';
 import { Navigate } from 'react-router-dom';
 import { AuthStatus } from '../types/auth-status';
+import { useAppSelector } from '../hooks/redux';
 
-interface PrivateRouteProps {
-  authStatus: AuthStatus;
-}
-
-export function PrivateRoute({ authStatus }: PrivateRouteProps) {
+export function PrivateRoute() {
+  const authStatus = useAppSelector((state) => state.auth.authStatus);
   const isAuth = authStatus === AuthStatus.AUTH;
   return isAuth ? <Outlet /> : <Navigate to={AppRoute.LOGIN} />;
 }

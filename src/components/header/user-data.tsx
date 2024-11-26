@@ -1,6 +1,8 @@
 ﻿import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import { AppRoute } from '../../routing/routes';
+import { useAppDispatch } from '../../hooks/redux';
+import { logout } from '../../store/auth/apiActions';
 
 export function UserData({
   email,
@@ -9,6 +11,12 @@ export function UserData({
   email: string;
   favoriteCount: number;
 }) {
+  const dispatch = useAppDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
   return (
     <ul className="header__nav-list">
       <li className={cn('header__nav-item', 'user')}>
@@ -24,7 +32,7 @@ export function UserData({
         </Link>
       </li>
       <li className="header__nav-item">
-        <Link className="header__nav-link" to={AppRoute.LOGIN}>
+        <Link className="header__nav-link" to={AppRoute.LOGIN} onClick={handleLogout}>
           <span className="header__signout">Sign out</span>
         </Link>
       </li>
