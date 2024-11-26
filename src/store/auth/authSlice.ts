@@ -1,6 +1,6 @@
 ﻿import { createReducer, isAnyOf } from '@reduxjs/toolkit';
 import { AuthStatus } from '../../types/auth-status';
-import { User, UserFullData } from '../../types/user';
+import { UserFullData } from '../../types/user';
 import { checkLogin, login, logout } from './apiActions';
 import { dropToken, saveToken } from '../../api/token';
 
