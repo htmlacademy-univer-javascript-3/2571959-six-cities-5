@@ -1,4 +1,15 @@
 ﻿import { configureStore } from '@reduxjs/toolkit';
-import { citiesReducer } from './reducer';
+import { offersReducer } from './offers/offersSlice';
+import { api } from '../api/api';
 
-export const store = configureStore({ reducer: citiesReducer });
+export const store = configureStore({
+  reducer: {
+    offers: offersReducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      thunk: {
+        extraArgument: { api },
+      },
+    }),
+});

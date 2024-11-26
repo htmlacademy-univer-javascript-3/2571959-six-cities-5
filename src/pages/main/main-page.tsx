@@ -2,16 +2,23 @@
 import { Header } from '../../components/header/header';
 import { Tabs } from '../../components/tabs/tabs';
 import { Places } from '../../components/places/places';
-import { PlacesEmpty } from '../../components/places/places-empty';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { selectCurrentOffers } from '../../store/selectors';
-import { setCity } from '../../store/action';
+import { setCity } from '../../store/offers/offersSlice';
+import { Spinner } from '../../components/spinner/spinner';
+import { useEffect } from 'react';
+import { fetchOffers } from '../../store/offers/apiActions';
 
 export function MainPage() {
   const dispatch = useAppDispatch();
   const offers = useAppSelector(selectCurrentOffers);
   const isEmpty = offers.length === 0;
-  const selectedCity = useAppSelector((state) => state.city);
+  const selectedCity = useAppSelector((state) => state.offers.city);
+  const isLoading = useAppSelector((state) => state.offers.loading);
+
+  useEffect(() => {
+    dispatch(fetchOffers());
+  }, [dispatch]);
 
   const handleCityChange = (city: string) => {
     dispatch(setCity(city));
@@ -33,8 +40,8 @@ export function MainPage() {
               'cities__places-container--empty': isEmpty,
             })}
           >
-            {isEmpty ? (
-              <PlacesEmpty selectedCity={selectedCity} />
+            {isLoading ? (
+              <Spinner />
             ) : (
               <Places selectedCity={selectedCity} offers={offers} />
             )}

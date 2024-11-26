@@ -6,6 +6,7 @@ import { Map } from '../map/map';
 import { sortingOrder, sorting, DEFAULT_ZOOM } from '../../utils/constants';
 import { SortingOrder } from '../sorting-order/sorting-order';
 import styles from './places.module.css';
+import { PlacesEmpty } from './places-empty';
 
 interface CityPlacesProps extends PlacesProps {
   selectedCity: string;
@@ -14,6 +15,10 @@ interface CityPlacesProps extends PlacesProps {
 export function Places({ selectedCity, offers }: CityPlacesProps) {
   const [order, setOrder] = useState<sortingOrder>('Price: low to high');
   const [activeCard, setActiveCard] = useState<string | null>(null);
+  if (offers.length === 0) {
+    return <PlacesEmpty selectedCity={selectedCity} />;
+  }
+
   const points = offers.map((x) => ({
     name: x.id,
     location: x.location,
