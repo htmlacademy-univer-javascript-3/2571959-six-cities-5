@@ -21,3 +21,23 @@ export function createGetAction<TResult = void, TArg = undefined>(
     return data;
   });
 }
+
+export function createPostAction<TResult = void, TArg = undefined>(
+  typePrefix: string,
+  url: string
+) {
+  return createActionWithApi<TResult, TArg>(typePrefix, async (arg, api) => {
+    const { data } = await api.post<TResult>(url, arg);
+    return data;
+  });
+}
+
+export function createDeleteAction<TResult = void, TArg = undefined>(
+  typePrefix: string,
+  url: string
+) {
+  return createActionWithApi<TResult, TArg>(typePrefix, async (_, api) => {
+    const { data } = await api.delete<TResult>(url);
+    return data;
+  });
+}
