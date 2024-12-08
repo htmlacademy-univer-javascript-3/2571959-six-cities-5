@@ -12,11 +12,14 @@ function createActionWithApi<TResult = void, TArg = undefined>(
   );
 }
 
-export function createGetAction<TResult = void, TArg = undefined>(
+export function createGetAction<TResult = void, TArg extends Record<string, string> | undefined = undefined>(
   typePrefix: string,
   url: string
 ) {
   return createActionWithApi<TResult, TArg>(typePrefix, async (arg, api) => {
+    if (arg !== undefined) {
+      url = Object.entries(arg).reduce((prevUrl, [key, value]) => prevUrl.replace(`:${key}`, value), url);
+    }
     const { data } = await api.get<TResult>(url);
     return data;
   });
