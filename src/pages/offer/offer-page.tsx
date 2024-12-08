@@ -97,7 +97,7 @@ export function OfferPage() {
               </div>
               <section className="offer__reviews reviews">
                 <Reviews reviews={reviews} />
-                {authStatus === AuthStatus.AUTH && <ReviewForm />}
+                {authStatus === AuthStatus.AUTH && <ReviewForm offerId={offer.id} />}
               </section>
             </div>
           </div>

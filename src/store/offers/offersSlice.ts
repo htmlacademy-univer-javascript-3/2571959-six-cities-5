@@ -1,7 +1,13 @@
 ﻿import { createSlice, PayloadAction, isAnyOf } from '@reduxjs/toolkit';
 import { DEFAULT_CITY } from '../../utils/constants';
 import { Offer, OfferCardData } from '../../types/offer';
-import { fetchNearbyOffers, fetchOffer, fetchOffers, fetchReviews } from './apiActions';
+import {
+  addReview,
+  fetchNearbyOffers,
+  fetchOffer,
+  fetchOffers,
+  fetchReviews,
+} from './apiActions';
 import { Review } from '../../types/review';
 
 interface OffersState {
@@ -35,7 +41,7 @@ const citiesSlice = createSlice({
       state.offer = undefined;
       state.nearbyOffers = [];
       state.reviews = [];
-    }
+    },
   },
   extraReducers: (builder) =>
     builder
@@ -60,9 +66,12 @@ const citiesSlice = createSlice({
       .addCase(fetchReviews.fulfilled, (state, action) => {
         state.reviews = action.payload;
       })
+      .addCase(addReview.fulfilled, (state, action) => {
+        state.reviews.push(action.payload);
+      })
       .addMatcher(isAnyOf(fetchOffers.pending, fetchOffer.pending), (state) => {
         state.loading = true;
-      })
+      }),
 });
 
 export const { setCity, setOffers, clearOffer } = citiesSlice.actions;

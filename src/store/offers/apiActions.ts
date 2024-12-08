@@ -1,6 +1,6 @@
 ﻿import { Offer, OfferCardData } from '../../types/offer';
 import { Review } from '../../types/review';
-import { createGetAction } from '../../utils/actions';
+import { createGetAction, createPostAction } from '../../utils/actions';
 
 export const fetchOffers = createGetAction<OfferCardData[]>(
   'FETCH_OFFERS',
@@ -21,3 +21,8 @@ export const fetchReviews = createGetAction<Review[], { offerId: string }>(
   'FETCH_REVIEWS',
   'six-cities/comments/:offerId'
 );
+
+export const addReview = createPostAction<
+  Review,
+  { params: { offerId: string }; data: { comment: string; rating: number } }
+>('ADD_REVIEW', 'six-cities/comments/:offerId');

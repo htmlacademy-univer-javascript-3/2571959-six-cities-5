@@ -25,14 +25,23 @@ export function createGetAction<TResult = void, TArg extends Record<string, stri
   });
 }
 
-export function createPostAction<TResult = void, TArg = undefined>(
+// eslint-disable-next-line @typescript-eslint/ban-types
+export function createPostAction<TResult = void, TArg extends PostArg = {}>(
   typePrefix: string,
   url: string
 ) {
   return createActionWithApi<TResult, TArg>(typePrefix, async (arg, api) => {
-    const { data } = await api.post<TResult>(url, arg);
+    if (arg && arg.params) {
+      url = Object.entries(arg.params).reduce((prevUrl, [key, value]) => prevUrl.replace(`:${key}`, value), url);
+    }
+    const { data } = await api.post<TResult>(url, arg.data);
     return data;
   });
+}
+
+interface PostArg {
+  params?: Record<string, string>;
+  data?: object;
 }
 
 export function createDeleteAction<TResult = void, TArg = undefined>(

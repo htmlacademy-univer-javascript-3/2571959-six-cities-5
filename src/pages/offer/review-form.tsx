@@ -1,10 +1,16 @@
 ﻿import { useState } from 'react';
+import { useAppDispatch } from '../../hooks/redux';
+import { addReview } from '../../store/offers/apiActions';
 
-export function ReviewForm() {
+interface ReviewFormProps {
+  offerId: string;
+}
+
+export function ReviewForm({ offerId }: ReviewFormProps) {
+  const dispatch = useAppDispatch();
   const [formData, setFormData] = useState({
     rating: 0,
     comment: '',
-    disabled: false,
   });
 
   const handleRatingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,8 +23,13 @@ export function ReviewForm() {
     setFormData({ ...formData, comment: value });
   };
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(addReview({ params: { offerId }, data: formData }));
+  };
+
   return (
-    <form className="reviews__form form">
+    <form className="reviews__form form" onSubmit={handleSubmit}>
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
@@ -123,7 +134,6 @@ export function ReviewForm() {
         maxLength={300}
         minLength={50}
         onChange={handleCommentChange}
-        disabled={formData.disabled}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -135,7 +145,6 @@ export function ReviewForm() {
           className="reviews__submit form__submit button"
           type="submit"
           disabled={
-            formData.disabled ||
             formData.comment.length > 300 ||
             formData.comment.length < 50 ||
             formData.rating === 0
