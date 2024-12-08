@@ -6,7 +6,6 @@ import { FavoritesPage } from './pages/favorites/favorites-page';
 import { NotFoundPage } from './pages/not-found/not-found-page';
 import { AppRoute } from './routing/routes';
 import { PrivateRoute } from './routing/private-route';
-import { AuthStatus } from './types/auth-status';
 import { offers } from './mocks/offers';
 import { Providers } from './providers';
 import { store } from './store';
@@ -21,7 +20,7 @@ export function App() {
         <Routes>
           <Route path={AppRoute.ROOT} element={<MainPage />} />
           <Route path={AppRoute.LOGIN} element={<LoginPage />} />
-          <Route path={AppRoute.OFFER} element={<OfferPage authStatus={AuthStatus.AUTH} />} />
+          <Route path={AppRoute.OFFER} element={<OfferPage />} />
           <Route element={<PrivateRoute />}>
             <Route path={AppRoute.FAVORITES} element={<FavoritesPage offers={offers} />} />
           </Route>

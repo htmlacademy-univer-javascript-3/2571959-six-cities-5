@@ -7,36 +7,23 @@ import { OfferUserAvatar } from '../../components/user/user-avatar';
 import { AuthStatus } from '../../types/auth-status';
 import { Reviews } from './reviews';
 import { ReviewForm } from './review-form';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { NotFoundPage } from '../not-found/not-found-page';
 import cn from 'classnames';
-import { selectCurrentOffers } from '../../store/selectors';
 import { PlaceCardNear } from '../../components/card/place-card';
 import { Map } from '../../components/map/map';
-import { useEffect } from 'react';
-import { DEFAULT_CITY, DEFAULT_ZOOM } from '../../utils/constants';
+import { DEFAULT_ZOOM } from '../../utils/constants';
 import styles from './offer-page.module.css';
-import { setCity } from '../../store/offers/offersSlice';
+import { Spinner } from '../../components/spinner/spinner';
+import { useOfferPage } from './use-offer-page';
+import { useAppSelector } from '../../hooks/redux';
 
-interface OfferPageProps {
-  authStatus: AuthStatus;
-}
+export function OfferPage() {
+  const authStatus = useAppSelector((state) => state.auth.authStatus);
+  const { offer, reviews, nearOffers, isLoading } = useOfferPage();
 
-export function OfferPage({ authStatus }: OfferPageProps) {
-  const dispatch = useAppDispatch();
-  //const { id: offerId } = useParams<{ id?: string }>();
-  const offer = useAppSelector((state) => state.offers.offer);
-
-  useEffect(() => {
-    dispatch(setCity(offer?.city.name ?? DEFAULT_CITY));
-  });
-
-  const reviews = useAppSelector((state) => state.offers.reviews ?? []);
-  const nearOffers = useAppSelector((state) =>
-    selectCurrentOffers(state)
-      .filter((x) => x.id !== offer?.id)
-      .slice(0, 3)
-  );
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   if (!offer) {
     return <NotFoundPage />;
@@ -110,7 +97,7 @@ export function OfferPage({ authStatus }: OfferPageProps) {
               </div>
               <section className="offer__reviews reviews">
                 <Reviews reviews={reviews} />
-                {authStatus === AuthStatus.AUTH && <ReviewForm />}
+                {authStatus === AuthStatus.AUTH && <ReviewForm offerId={offer.id} />}
               </section>
             </div>
           </div>
