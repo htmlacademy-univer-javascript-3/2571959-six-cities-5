@@ -1,6 +1,10 @@
 ﻿import cn from 'classnames';
-import { useAppDispatch } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { toggleFavorite } from '../../store/offers/apiActions';
+import { AuthStatus } from '../../types/auth-status';
+import { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AppRoute } from '../../routing/routes';
 
 interface BookmarkButtonProps extends GenericBookmarkButtonProps {
   className: string;
@@ -23,12 +27,17 @@ function BookmarkButton({
   offerId,
 }: BookmarkButtonProps) {
   const dispatch = useAppDispatch();
-  const handleClick = () => {
+  const navigate = useNavigate();
+  const authStatus = useAppSelector((state) => state.auth.authStatus);
+  const handleClick = useCallback(() => {
+    if (authStatus !== AuthStatus.AUTH) {
+      navigate(AppRoute.LOGIN);
+      return;
+    }
     dispatch(
       toggleFavorite({ params: { offerId, status: isFavorite ? '0' : '1' } })
     );
-  };
-
+  }, [dispatch, authStatus, offerId, isFavorite, navigate]);
   return (
     <button
       className={cn('button', className)}
