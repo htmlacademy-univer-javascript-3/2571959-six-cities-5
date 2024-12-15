@@ -2,10 +2,11 @@
 import { Header } from '../../components/header/header';
 import { AppRoute } from '../../routing/routes';
 import { OfferCardData } from '../../types/offer';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { CityGroup } from './city-group';
-import { useAppSelector } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { selectFavoriteOffers } from '../../store/selectors';
+import { fetchFavoriteOffers } from '../../store/offers/apiActions';
 
 function extractGroups(offers: OfferCardData[]) {
   const groups = offers.reduce((acc, offer) => {
@@ -20,6 +21,11 @@ function extractGroups(offers: OfferCardData[]) {
 }
 
 export function FavoritesPage() {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(fetchFavoriteOffers());
+  }, [dispatch]);
+
   const offers = useAppSelector(selectFavoriteOffers);
   const groups = useMemo(() => extractGroups(offers), [offers]);
   return (
