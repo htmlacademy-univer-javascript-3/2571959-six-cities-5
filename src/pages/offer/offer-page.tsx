@@ -60,7 +60,7 @@ export function OfferPage() {
               {offer.isPremium && <OfferMark />}
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">{offer.title}</h1>
-                <OfferBookmarkButton isFavorite={offer.isFavorite} />
+                <OfferBookmarkButton isFavorite={offer.isFavorite} offerId={offer.id} />
               </div>
               <OfferStarRating rating={offer.rating} />
               <ul className="offer__features">

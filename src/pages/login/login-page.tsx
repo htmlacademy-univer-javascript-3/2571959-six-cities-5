@@ -1,16 +1,26 @@
 ﻿import { Link, useNavigate } from 'react-router-dom';
 import { Header } from '../../components/header/header';
 import { AppRoute } from '../../routing/routes';
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useMemo, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { login } from '../../store/auth/apiActions';
 import { AuthStatus } from '../../types/auth-status';
+import { locations } from '../../utils/constants';
+import { setCity } from '../../store/offers/offersSlice';
 
 export function LoginPage() {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const dispatch = useAppDispatch();
   const authStatus = useAppSelector((state) => state.auth.authStatus);
   const navigate = useNavigate();
+  const city = useMemo(
+    () => locations[Math.floor(Math.random() * locations.length)],
+    []
+  );
+
+  const handleCityClick = () => {
+    dispatch(setCity(city));
+  };
 
   useEffect(() => {
     if (authStatus === AuthStatus.AUTH) {
@@ -18,14 +28,13 @@ export function LoginPage() {
     }
   }, [authStatus, navigate]);
 
-
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFormState({...formState, [e.target.name]: e.target.value});
+    setFormState({ ...formState, [e.target.name]: e.target.value });
   };
 
   const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(login({data: formState}));
+    dispatch(login({ data: formState }));
   };
 
   return (
@@ -70,8 +79,12 @@ export function LoginPage() {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link className="locations__item-link" to={AppRoute.ROOT}>
-                <span>Amsterdam</span>
+              <Link
+                className="locations__item-link"
+                to={AppRoute.ROOT}
+                onClick={handleCityClick}
+              >
+                <span>{city}</span>
               </Link>
             </div>
           </section>

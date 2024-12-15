@@ -53,5 +53,11 @@ export function Map(props: MapProps): JSX.Element {
     }
   }, [map, places, selectedCity]);
 
+  useEffect(() => {
+    if (map) {
+      map.setView({ lat: city.location.latitude, lng: city.location.longitude}, city.location.zoom);
+    }
+  }, [map, city]);
+
   return <div className={className} ref={mapRef} />;
 }

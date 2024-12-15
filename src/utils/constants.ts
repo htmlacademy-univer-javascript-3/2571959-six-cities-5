@@ -22,3 +22,12 @@ export const sortingKeys = Object.keys(sortingOrders);
 export const DEFAULT_CITY = 'Amsterdam';
 
 export const DEFAULT_ZOOM = 12;
+
+export const locations = [
+  'Paris',
+  'Cologne',
+  'Brussels',
+  'Amsterdam',
+  'Hamburg',
+  'Dusseldorf',
+];
