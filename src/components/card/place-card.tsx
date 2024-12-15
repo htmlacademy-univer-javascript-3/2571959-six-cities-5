@@ -66,7 +66,7 @@ function PlaceCardInternal({
 
 export const PlaceCard = memo(PlaceCardInternal);
 
-export function PlaceCardFavorites({ offer }: Pick<PlaceCardProps, 'offer'>) {
+function PlaceCardFavoritesInternal({ offer }: Pick<PlaceCardProps, 'offer'>) {
   return (
     <PlaceCard
       offer={offer}
@@ -79,7 +79,7 @@ export function PlaceCardFavorites({ offer }: Pick<PlaceCardProps, 'offer'>) {
   );
 }
 
-export function PlaceCardCities({
+function PlaceCardCitiesInternal({
   offer,
   onHover,
 }: Pick<PlaceCardProps, 'offer' | 'onHover'>) {
@@ -95,7 +95,7 @@ export function PlaceCardCities({
   );
 }
 
-export function PlaceCardNear({
+function PlaceCardNearInternal({
   offer,
   onHover,
 }: Pick<PlaceCardProps, 'offer' | 'onHover'>) {
@@ -110,3 +110,8 @@ export function PlaceCardNear({
     />
   );
 }
+
+export const PlaceCardFavorites = memo(PlaceCardFavoritesInternal);
+export const PlaceCardCities = memo(PlaceCardCitiesInternal);
+export const PlaceCardNear = memo(PlaceCardNearInternal);
+
