@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { selectCurrentOffers } from '../../store/selectors';
 import { setCity } from '../../store/offers/offersSlice';
 import { Spinner } from '../../components/spinner/spinner';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { fetchOffers } from '../../store/offers/apiActions';
 
 export function MainPage() {
@@ -20,9 +20,12 @@ export function MainPage() {
     dispatch(fetchOffers());
   }, [dispatch]);
 
-  const handleCityChange = (city: string) => {
-    dispatch(setCity(city));
-  };
+  const handleCityChange = useCallback(
+    (city: string) => {
+      dispatch(setCity(city));
+    },
+    [dispatch]
+  );
 
   return (
     <div className={cn('page', 'page--gray', 'page--main')}>

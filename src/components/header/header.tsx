@@ -4,12 +4,13 @@ import { AppRoute } from '../../routing/routes';
 import { AuthStatus } from '../../types/auth-status';
 import { useAppSelector } from '../../hooks/redux';
 import { UserData, UserDataNoAuth } from './user-data';
+import { memo } from 'react';
 
 interface HeaderProps {
   showUserMenu?: boolean;
 }
 
-export function Header({ showUserMenu = true }: HeaderProps) {
+function HeaderInternal({ showUserMenu = true }: HeaderProps) {
   const { user, authStatus } = useAppSelector((state) => state.auth);
   const isAuth = authStatus === AuthStatus.AUTH;
   return (
@@ -44,3 +45,5 @@ export function Header({ showUserMenu = true }: HeaderProps) {
     </header>
   );
 }
+
+export const Header = memo(HeaderInternal);

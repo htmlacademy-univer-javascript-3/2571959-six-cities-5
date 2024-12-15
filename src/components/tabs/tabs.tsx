@@ -1,41 +1,60 @@
 ﻿import cn from 'classnames';
-import { Link } from 'react-router-dom';
-import { AppRoute } from '../../routing/routes';
+import { memo } from 'react';
 
 interface TabsProps {
   selectedCity: string;
   onCityChange: (city: string) => void;
 }
 
-export function Tabs({ selectedCity, onCityChange }: TabsProps) {
-  const locations = [
-    'Paris',
-    'Cologne',
-    'Brussels',
-    'Amsterdam',
-    'Hamburg',
-    'Dusseldorf',
-  ];
+interface TabProps {
+  city: string;
+  active: boolean;
+  onCityChange: (city: string) => void;
+}
 
+function TabInternal({ city, active, onCityChange }: TabProps) {
+  return (
+    <li key={city} className="locations__item">
+      <a
+        className={cn('locations__item-link', 'tabs__item', {
+          'tabs__item--active': active,
+        })}
+        onClick={() => onCityChange(city)}
+      >
+        <span>{city}</span>
+      </a>
+    </li>
+  );
+}
+
+const Tab = memo(TabInternal);
+
+const locations = [
+  'Paris',
+  'Cologne',
+  'Brussels',
+  'Amsterdam',
+  'Hamburg',
+  'Dusseldorf',
+];
+
+function TabsInternal({ selectedCity, onCityChange }: TabsProps) {
   return (
     <div className="tabs">
       <section className={cn('locations', 'container')}>
         <ul className={cn('locations__list', 'tabs__list')}>
           {locations.map((city) => (
-            <li key={city} className="locations__item">
-              <Link
-                className={cn('locations__item-link', 'tabs__item', {
-                  'tabs__item--active': city === selectedCity,
-                })}
-                to={AppRoute.ROOT}
-                onClick={() => onCityChange(city)}
-              >
-                <span>{city}</span>
-              </Link>
-            </li>
+            <Tab
+              key={city}
+              city={city}
+              active={city === selectedCity}
+              onCityChange={onCityChange}
+            />
           ))}
         </ul>
       </section>
     </div>
   );
 }
+
+export const Tabs = memo(TabsInternal);

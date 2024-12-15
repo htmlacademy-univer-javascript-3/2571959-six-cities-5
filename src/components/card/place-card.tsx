@@ -6,6 +6,7 @@ import { Mark } from './mark';
 import cn from 'classnames';
 import { buildRoute } from '../../utils/url';
 import { AppRoute } from '../../routing/routes';
+import { memo } from 'react';
 
 interface PlaceCardProps {
   offer: OfferCardData;
@@ -17,7 +18,7 @@ interface PlaceCardProps {
   onHover?: (id: string | null) => void;
 }
 
-export function PlaceCard({
+function PlaceCardInternal({
   offer,
   width,
   height,
@@ -63,7 +64,9 @@ export function PlaceCard({
   );
 }
 
-export function PlaceCardFavorites({ offer }: Pick<PlaceCardProps, 'offer'>) {
+export const PlaceCard = memo(PlaceCardInternal);
+
+function PlaceCardFavoritesInternal({ offer }: Pick<PlaceCardProps, 'offer'>) {
   return (
     <PlaceCard
       offer={offer}
@@ -76,7 +79,7 @@ export function PlaceCardFavorites({ offer }: Pick<PlaceCardProps, 'offer'>) {
   );
 }
 
-export function PlaceCardCities({
+function PlaceCardCitiesInternal({
   offer,
   onHover,
 }: Pick<PlaceCardProps, 'offer' | 'onHover'>) {
@@ -92,7 +95,7 @@ export function PlaceCardCities({
   );
 }
 
-export function PlaceCardNear({
+function PlaceCardNearInternal({
   offer,
   onHover,
 }: Pick<PlaceCardProps, 'offer' | 'onHover'>) {
@@ -107,4 +110,8 @@ export function PlaceCardNear({
     />
   );
 }
+
+export const PlaceCardFavorites = memo(PlaceCardFavoritesInternal);
+export const PlaceCardCities = memo(PlaceCardCitiesInternal);
+export const PlaceCardNear = memo(PlaceCardNearInternal);
 
