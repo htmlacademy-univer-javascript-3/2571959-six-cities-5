@@ -93,12 +93,19 @@ const citiesSlice = createSlice({
       })
       .addCase(toggleFavorite.fulfilled, (state, action) => {
         offersAdapter.upsertOne(state.cards.all, action.payload);
+        if (state.offer?.id === action.payload.id) {
+          state.offer = action.payload;
+        }
       })
       .addMatcher(isAnyOf(fetchOffers.pending, fetchOffer.pending), (state) => {
         state.loading = true;
       }),
 });
 
-export const { selectAll: selectOffers, selectById: selectOfferById, selectEntities: selectOffersMap } = offersAdapter.getSelectors();
+export const {
+  selectAll: selectOffers,
+  selectById: selectOfferById,
+  selectEntities: selectOffersMap,
+} = offersAdapter.getSelectors();
 export const { setCity, setOffers, clearOffer } = citiesSlice.actions;
 export const offersReducer = citiesSlice.reducer;

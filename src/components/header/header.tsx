@@ -5,6 +5,7 @@ import { AuthStatus } from '../../types/auth-status';
 import { useAppSelector } from '../../hooks/redux';
 import { UserData, UserDataNoAuth } from './user-data';
 import { memo } from 'react';
+import { selectFavoriteOffers } from '../../store/selectors';
 
 interface HeaderProps {
   showUserMenu?: boolean;
@@ -13,6 +14,7 @@ interface HeaderProps {
 function HeaderInternal({ showUserMenu = true }: HeaderProps) {
   const { user, authStatus } = useAppSelector((state) => state.auth);
   const isAuth = authStatus === AuthStatus.AUTH;
+  const favoriteCount = useAppSelector(selectFavoriteOffers).length;
   return (
     <header className="header">
       <div className="container">
@@ -34,7 +36,7 @@ function HeaderInternal({ showUserMenu = true }: HeaderProps) {
           {showUserMenu && (
             <nav className="header__nav">
               {isAuth ? (
-                <UserData email={user!.email} favoriteCount={3} />
+                <UserData email={user!.email} favoriteCount={favoriteCount} />
               ) : (
                 <UserDataNoAuth />
               )}
