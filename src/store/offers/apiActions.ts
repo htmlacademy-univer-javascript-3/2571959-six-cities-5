@@ -26,3 +26,13 @@ export const addReview = createPostAction<
   Review,
   { params: { offerId: string }; data: { comment: string; rating: number } }
 >('ADD_REVIEW', 'six-cities/comments/:offerId');
+
+export const fetchFavoriteOffers = createGetAction<OfferCardData[]>(
+  'FETCH_FAVORITE_OFFERS',
+  '/six-cities/favorite'
+);
+
+export const toggleFavorite = createPostAction<
+  Offer,
+  { params: { offerId: string; status: string } }
+>('CHANGE_FAVORITE_STATUS', '/six-cities/favorite/:offerId/:status');

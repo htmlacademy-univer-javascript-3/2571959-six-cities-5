@@ -1,8 +1,16 @@
-﻿import { createSlice, PayloadAction, isAnyOf } from '@reduxjs/toolkit';
+﻿import {
+  createSlice,
+  PayloadAction,
+  isAnyOf,
+  createEntityAdapter,
+  EntityState,
+} from '@reduxjs/toolkit';
 import { DEFAULT_CITY } from '../../utils/constants';
 import { Offer, OfferCardData } from '../../types/offer';
 import {
   addReview,
+  toggleFavorite,
+  fetchFavoriteOffers,
   fetchNearbyOffers,
   fetchOffer,
   fetchOffers,
@@ -10,10 +18,17 @@ import {
 } from './apiActions';
 import { Review } from '../../types/review';
 
+const offersAdapter = createEntityAdapter<OfferCardData>({
+  selectId: (offer) => offer.id,
+});
+
 interface OffersState {
   city: string;
-  offers: OfferCardData[];
-  nearbyOffers: OfferCardData[];
+  cards: {
+    all: EntityState<OfferCardData>;
+    nearbyIds: string[];
+    favoriteIds: string[];
+  };
   loading: boolean;
   reviews: Review[];
   offer?: Offer;
@@ -21,8 +36,11 @@ interface OffersState {
 
 const initialState = {
   city: DEFAULT_CITY,
-  offers: [],
-  nearbyOffers: [],
+  cards: {
+    all: offersAdapter.getInitialState(),
+    nearbyIds: [],
+    favoriteIds: [],
+  },
   loading: false,
   reviews: [],
 } as OffersState;
@@ -35,18 +53,18 @@ const citiesSlice = createSlice({
       state.city = action.payload;
     },
     setOffers: (state, action: PayloadAction<Offer[]>) => {
-      state.offers = action.payload;
+      offersAdapter.upsertMany(state.cards.all, action.payload);
     },
     clearOffer: (state) => {
       state.offer = undefined;
-      state.nearbyOffers = [];
+      state.cards.nearbyIds = [];
       state.reviews = [];
     },
   },
   extraReducers: (builder) =>
     builder
       .addCase(fetchOffers.fulfilled, (state, action) => {
-        state.offers = action.payload;
+        offersAdapter.upsertMany(state.cards.all, action.payload);
         state.loading = false;
       })
       .addCase(fetchOffers.rejected, (state) => {
@@ -61,7 +79,8 @@ const citiesSlice = createSlice({
         state.loading = false;
       })
       .addCase(fetchNearbyOffers.fulfilled, (state, action) => {
-        state.nearbyOffers = action.payload;
+        offersAdapter.upsertMany(state.cards.all, action.payload);
+        state.cards.nearbyIds = action.payload.map((offer) => offer.id);
       })
       .addCase(fetchReviews.fulfilled, (state, action) => {
         state.reviews = action.payload;
@@ -69,10 +88,17 @@ const citiesSlice = createSlice({
       .addCase(addReview.fulfilled, (state, action) => {
         state.reviews.push(action.payload);
       })
+      .addCase(fetchFavoriteOffers.fulfilled, (state, action) => {
+        offersAdapter.upsertMany(state.cards.all, action.payload);
+      })
+      .addCase(toggleFavorite.fulfilled, (state, action) => {
+        offersAdapter.upsertOne(state.cards.all, action.payload);
+      })
       .addMatcher(isAnyOf(fetchOffers.pending, fetchOffer.pending), (state) => {
         state.loading = true;
       }),
 });
 
+export const { selectAll: selectOffers, selectById: selectOfferById, selectEntities: selectOffersMap } = offersAdapter.getSelectors();
 export const { setCity, setOffers, clearOffer } = citiesSlice.actions;
 export const offersReducer = citiesSlice.reducer;

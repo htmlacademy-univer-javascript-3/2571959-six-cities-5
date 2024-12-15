@@ -4,10 +4,8 @@ import { AppRoute } from '../../routing/routes';
 import { OfferCardData } from '../../types/offer';
 import { useMemo } from 'react';
 import { CityGroup } from './city-group';
-
-interface FavoritesPageProps {
-  offers: OfferCardData[];
-}
+import { useAppSelector } from '../../hooks/redux';
+import { selectFavoriteOffers } from '../../store/selectors';
 
 function extractGroups(offers: OfferCardData[]) {
   const groups = offers.reduce((acc, offer) => {
@@ -21,7 +19,8 @@ function extractGroups(offers: OfferCardData[]) {
   return Object.entries(groups);
 }
 
-export function FavoritesPage({ offers }: FavoritesPageProps) {
+export function FavoritesPage() {
+  const offers = useAppSelector(selectFavoriteOffers);
   const groups = useMemo(() => extractGroups(offers), [offers]);
   return (
     <div className="page">

@@ -1,4 +1,6 @@
 ﻿import cn from 'classnames';
+import { useAppDispatch } from '../../hooks/redux';
+import { toggleFavorite } from '../../store/offers/apiActions';
 
 interface BookmarkButtonProps extends GenericBookmarkButtonProps {
   className: string;
@@ -9,6 +11,7 @@ interface BookmarkButtonProps extends GenericBookmarkButtonProps {
 
 interface GenericBookmarkButtonProps {
   isFavorite: boolean;
+  offerId: string;
 }
 
 function BookmarkButton({
@@ -17,9 +20,21 @@ function BookmarkButton({
   iconClassName,
   width,
   height,
+  offerId,
 }: BookmarkButtonProps) {
+  const dispatch = useAppDispatch();
+  const handleClick = () => {
+    dispatch(
+      toggleFavorite({ params: { offerId, status: isFavorite ? '0' : '1' } })
+    );
+  };
+
   return (
-    <button className={cn('button', className)} type="button">
+    <button
+      className={cn('button', className)}
+      type="button"
+      onClick={handleClick}
+    >
       <svg className={iconClassName} width={width} height={height}>
         <use xlinkHref="#icon-bookmark" />
       </svg>

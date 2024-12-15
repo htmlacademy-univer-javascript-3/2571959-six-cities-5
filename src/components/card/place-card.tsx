@@ -52,7 +52,10 @@ function PlaceCardInternal({
             <b className="place-card__price-value">€{offer.price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <PlaceCardBookmarkButton isFavorite={offer.isFavorite} />
+          <PlaceCardBookmarkButton
+            isFavorite={offer.isFavorite}
+            offerId={offer.id}
+          />
         </div>
         <PlaceCardStarRating rating={offer.rating} />
         <h2 className="place-card__name">
@@ -114,4 +117,3 @@ function PlaceCardNearInternal({
 export const PlaceCardFavorites = memo(PlaceCardFavoritesInternal);
 export const PlaceCardCities = memo(PlaceCardCitiesInternal);
 export const PlaceCardNear = memo(PlaceCardNearInternal);
-

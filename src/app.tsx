@@ -6,14 +6,19 @@ import { FavoritesPage } from './pages/favorites/favorites-page';
 import { NotFoundPage } from './pages/not-found/not-found-page';
 import { AppRoute } from './routing/routes';
 import { PrivateRoute } from './routing/private-route';
-import { offers } from './mocks/offers';
 import { Providers } from './providers';
 import { store } from './store';
 import { checkLogin } from './store/auth/apiActions';
+import { fetchFavoriteOffers } from './store/offers/apiActions';
 
-store.dispatch(checkLogin());
+store.dispatch(checkLogin()).then((action) => {
+  if (action.type === checkLogin.fulfilled.type) {
+    store.dispatch(fetchFavoriteOffers());
+  }
+});
 
 export function App() {
+
   return (
     <Providers>
       <Router>
@@ -22,7 +27,7 @@ export function App() {
           <Route path={AppRoute.LOGIN} element={<LoginPage />} />
           <Route path={AppRoute.OFFER} element={<OfferPage />} />
           <Route element={<PrivateRoute />}>
-            <Route path={AppRoute.FAVORITES} element={<FavoritesPage offers={offers} />} />
+            <Route path={AppRoute.FAVORITES} element={<FavoritesPage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

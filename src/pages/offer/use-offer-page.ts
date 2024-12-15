@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchOffer, fetchNearbyOffers, fetchReviews } from '../../store/offers/apiActions';
 import { clearOffer, setCity } from '../../store/offers/offersSlice';
 import { DEFAULT_CITY } from '../../utils/constants';
+import { selectNearbyOffers } from '../../store/selectors';
 
 export function useOfferPage() {
   const dispatch = useAppDispatch();
@@ -27,9 +28,7 @@ export function useOfferPage() {
   }, [offer, dispatch]);
 
   const reviews = useAppSelector((state) => state.offers.reviews ?? []);
-  const nearOffers = useAppSelector((state) =>
-    state.offers.nearbyOffers.slice(0, 3)
-  );
+  const nearOffers = useAppSelector(selectNearbyOffers).slice(0, 3);
   const isLoading = useAppSelector((state) => state.offers.loading);
 
   return { offer, reviews, nearOffers, isLoading };
