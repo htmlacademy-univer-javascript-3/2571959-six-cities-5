@@ -25,7 +25,7 @@ export function LoginPage() {
 
   const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(login(formState));
+    dispatch(login({data: formState}));
   };
 
   return (
