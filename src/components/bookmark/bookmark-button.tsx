@@ -2,7 +2,6 @@
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { toggleFavorite } from '../../store/offers/apiActions';
 import { AuthStatus } from '../../types/auth-status';
-import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../routing/routes';
 
@@ -29,7 +28,7 @@ function BookmarkButton({
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const authStatus = useAppSelector((state) => state.auth.authStatus);
-  const handleClick = useCallback(() => {
+  const handleClick = () => {
     if (authStatus !== AuthStatus.AUTH) {
       navigate(AppRoute.LOGIN);
       return;
@@ -37,7 +36,7 @@ function BookmarkButton({
     dispatch(
       toggleFavorite({ params: { offerId, status: isFavorite ? '0' : '1' } })
     );
-  }, [dispatch, authStatus, offerId, isFavorite, navigate]);
+  };
   return (
     <button
       className={cn('button', className)}

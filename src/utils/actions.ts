@@ -12,15 +12,19 @@ function createActionWithApi<TResult = void, TArg = undefined>(
   );
 }
 
-export function createGetAction<TResult = void, TArg extends Record<string, string> | undefined = undefined>(
-  typePrefix: string,
-  url: string
-) {
+export function createGetAction<
+  TResult = void,
+  TArg extends Record<string, string> | undefined = undefined
+>(typePrefix: string, url: string) {
   return createActionWithApi<TResult, TArg>(typePrefix, async (arg, api) => {
-    if (arg !== undefined) {
-      url = Object.entries(arg).reduce((prevUrl, [key, value]) => prevUrl.replace(`:${key}`, value), url);
-    }
-    const { data } = await api.get<TResult>(url);
+    const newUrl =
+      arg !== undefined
+        ? Object.entries(arg).reduce(
+          (prevUrl, [key, value]) => prevUrl.replace(`:${key}`, value),
+          url
+        )
+        : url;
+    const { data } = await api.get<TResult>(newUrl);
     return data;
   });
 }
@@ -31,10 +35,14 @@ export function createPostAction<TResult = void, TArg extends PostArg = {}>(
   url: string
 ) {
   return createActionWithApi<TResult, TArg>(typePrefix, async (arg, api) => {
-    if (arg && arg.params) {
-      url = Object.entries(arg.params).reduce((prevUrl, [key, value]) => prevUrl.replace(`:${key}`, value), url);
-    }
-    const { data } = await api.post<TResult>(url, arg.data);
+    const newUrl =
+      arg?.params !== undefined
+        ? Object.entries(arg.params).reduce(
+          (prevUrl, [key, value]) => prevUrl.replace(`:${key}`, value),
+          url
+        )
+        : url;
+    const { data } = await api.post<TResult>(newUrl, arg.data);
     return data;
   });
 }
