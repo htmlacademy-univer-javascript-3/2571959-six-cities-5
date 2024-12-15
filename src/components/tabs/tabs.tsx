@@ -1,5 +1,6 @@
 ﻿import cn from 'classnames';
 import { memo } from 'react';
+import { locations } from '../../utils/constants';
 
 interface TabsProps {
   selectedCity: string;
@@ -28,15 +29,6 @@ function TabInternal({ city, active, onCityChange }: TabProps) {
 }
 
 const Tab = memo(TabInternal);
-
-const locations = [
-  'Paris',
-  'Cologne',
-  'Brussels',
-  'Amsterdam',
-  'Hamburg',
-  'Dusseldorf',
-];
 
 function TabsInternal({ selectedCity, onCityChange }: TabsProps) {
   return (
