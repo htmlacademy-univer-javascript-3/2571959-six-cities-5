@@ -1,6 +1,6 @@
 ﻿import cn from 'classnames';
 import { PlaceCardCities } from '../card/place-card';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { PlacesProps } from './types';
 import { Map } from '../map/map';
 import { sortingOrder, sorting, DEFAULT_ZOOM } from '../../utils/constants';
@@ -12,7 +12,7 @@ interface CityPlacesProps extends PlacesProps {
   selectedCity: string;
 }
 
-export function Places({ selectedCity, offers }: CityPlacesProps) {
+function PlacesInternal({ selectedCity, offers }: CityPlacesProps) {
   const [order, setOrder] = useState<sortingOrder>('Price: low to high');
   const [activeCard, setActiveCard] = useState<string | null>(null);
   if (offers.length === 0) {
@@ -53,3 +53,5 @@ export function Places({ selectedCity, offers }: CityPlacesProps) {
     </>
   );
 }
+
+export const Places = memo(PlacesInternal);
