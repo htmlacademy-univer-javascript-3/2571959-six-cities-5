@@ -7,6 +7,7 @@ import { CityGroup } from './city-group';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { selectFavoriteOffers } from '../../store/selectors';
 import { fetchFavoriteOffers } from '../../store/offers/apiActions';
+import { FavoritesEmptyPage } from './favorites-empty-page';
 
 function extractGroups(offers: OfferCardData[]) {
   const groups = offers.reduce((acc, offer) => {
@@ -28,6 +29,11 @@ export function FavoritesPage() {
 
   const offers = useAppSelector(selectFavoriteOffers);
   const groups = useMemo(() => extractGroups(offers), [offers]);
+
+  if (!groups.length) {
+    return <FavoritesEmptyPage />;
+  }
+
   return (
     <div className="page">
       <Header />

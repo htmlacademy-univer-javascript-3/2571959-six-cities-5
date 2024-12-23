@@ -7,6 +7,7 @@ import { login } from '../../store/auth/apiActions';
 import { AuthStatus } from '../../types/auth-status';
 import { locations } from '../../utils/constants';
 import { setCity } from '../../store/offers/offersSlice';
+import { fetchFavoriteOffers } from '../../store/offers/apiActions';
 
 export function LoginPage() {
   const [formState, setFormState] = useState({ email: '', password: '' });
@@ -24,9 +25,10 @@ export function LoginPage() {
 
   useEffect(() => {
     if (authStatus === AuthStatus.AUTH) {
+      dispatch(fetchFavoriteOffers());
       navigate(AppRoute.ROOT);
     }
-  }, [authStatus, navigate]);
+  }, [authStatus, dispatch, navigate]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormState({ ...formState, [e.target.name]: e.target.value });

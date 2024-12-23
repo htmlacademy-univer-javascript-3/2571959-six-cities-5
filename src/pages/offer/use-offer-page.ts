@@ -27,7 +27,7 @@ export function useOfferPage() {
     dispatch(setCity(offer?.city.name ?? DEFAULT_CITY));
   }, [offer, dispatch]);
 
-  const reviews = useAppSelector((state) => state.offers.reviews ?? []);
+  const reviews = useAppSelector((state) => state.offers.reviews ?? []).slice(0, 10);
   const nearOffers = useAppSelector(selectNearbyOffers).slice(0, 3);
   const isLoading = useAppSelector((state) => state.offers.loading);
 
