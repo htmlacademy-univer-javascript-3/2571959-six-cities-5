@@ -9,16 +9,20 @@ import { PrivateRoute } from './routing/private-route';
 import { Providers } from './providers';
 import { store } from './store';
 import { checkLogin } from './store/auth/apiActions';
-import { fetchFavoriteOffers } from './store/offers/apiActions';
+import { fetchFavoriteOffers, fetchOffers } from './store/offers/apiActions';
 
-store.dispatch(checkLogin()).then((action) => {
-  if (action.type === checkLogin.fulfilled.type) {
-    store.dispatch(fetchFavoriteOffers());
-  }
-});
+store
+  .dispatch(checkLogin())
+  .then((action) => {
+    if (action.type === checkLogin.fulfilled.type) {
+      store.dispatch(fetchFavoriteOffers());
+    }
+  })
+  .finally(() => {
+    store.dispatch(fetchOffers());
+  });
 
 export function App() {
-
   return (
     <Providers>
       <Router>

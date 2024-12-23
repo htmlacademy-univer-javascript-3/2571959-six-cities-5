@@ -17,6 +17,7 @@ import {
   fetchReviews,
 } from './apiActions';
 import { Review } from '../../types/review';
+import { checkLogin, login, logout } from '../auth/apiActions';
 
 const offersAdapter = createEntityAdapter<OfferCardData>({
   selectId: (offer) => offer.id,
@@ -27,7 +28,6 @@ interface OffersState {
   cards: {
     all: EntityState<OfferCardData>;
     nearbyIds: string[];
-    favoriteIds: string[];
   };
   loading: boolean;
   reviews: Review[];
@@ -39,7 +39,6 @@ const initialState = {
   cards: {
     all: offersAdapter.getInitialState(),
     nearbyIds: [],
-    favoriteIds: [],
   },
   loading: false,
   reviews: [],
@@ -97,6 +96,19 @@ const citiesSlice = createSlice({
           state.offer = action.payload;
         }
       })
+      .addMatcher(
+        isAnyOf(login.rejected, checkLogin.rejected, logout.fulfilled),
+        (state) => {
+          Object.values(state.cards.all.entities)
+            .filter((x) => x !== undefined)
+            .forEach((c) => {
+              c.isFavorite = false;
+            });
+          if (state.offer?.isFavorite === true) {
+            state.offer.isFavorite = false;
+          }
+        }
+      )
       .addMatcher(isAnyOf(fetchOffers.pending, fetchOffer.pending), (state) => {
         state.loading = true;
       }),
