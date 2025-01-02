@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 import { UserAvatar, OfferUserAvatar, ReviewUserAvatar } from './user';
 import { generateUser } from '../../mocks';
 
-const mockUser = generateUser();
+const mockUser = {...generateUser(), isPro: true};
 
 describe('UserAvatar', () => {
   it('renders user avatar with correct props', () => {
