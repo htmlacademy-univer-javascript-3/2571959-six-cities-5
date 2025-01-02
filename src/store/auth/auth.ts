@@ -1,7 +1,7 @@
 ﻿import { createReducer, isAnyOf } from '@reduxjs/toolkit';
 import { AuthStatus } from '../../types/auth-status';
 import { UserFullData } from '../../types/user';
-import { checkLogin, login, logout } from './apiActions';
+import { checkLogin, login, logout } from './api-actions';
 import { dropToken, saveToken } from '../../api/token';
 
 interface AuthState {

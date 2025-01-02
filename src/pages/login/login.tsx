@@ -1,13 +1,13 @@
 ﻿import { Link, useNavigate } from 'react-router-dom';
 import { Header } from '../../components/header/header';
-import { AppRoute } from '../../routing/routes';
+import { AppRoute } from '../../routing/routing';
 import { ChangeEvent, FormEvent, useEffect, useMemo, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { login } from '../../store/auth/apiActions';
+import { login } from '../../store/auth/api-actions';
 import { AuthStatus } from '../../types/auth-status';
 import { locations } from '../../utils/constants';
-import { setCity } from '../../store/offers/offersSlice';
-import { fetchFavoriteOffers } from '../../store/offers/apiActions';
+import { setCity } from '../../store/offers/offers';
+import { fetchFavoriteOffers } from '../../store/offers/api-actions';
 
 export function LoginPage() {
   const [formState, setFormState] = useState({ email: '', password: '' });

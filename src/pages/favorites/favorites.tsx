@@ -1,12 +1,12 @@
 ﻿import { Link } from 'react-router-dom';
 import { Header } from '../../components/header/header';
-import { AppRoute } from '../../routing/routes';
+import { AppRoute } from '../../routing/routing';
 import { OfferCardData } from '../../types/offer';
 import { useEffect, useMemo } from 'react';
 import { CityGroup } from './city-group';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { selectFavoriteOffers } from '../../store/selectors';
-import { fetchFavoriteOffers } from '../../store/offers/apiActions';
+import { fetchFavoriteOffers } from '../../store/offers/api-actions';
 import { FavoritesEmptyPage } from './favorites-empty-page';
 
 function extractGroups(offers: OfferCardData[]) {

@@ -1,5 +1,5 @@
 ﻿import { Link } from 'react-router-dom';
-import { AppRoute } from '../../routing/routes';
+import { AppRoute } from '../../routing/routing';
 
 interface CityLabelProps {
   city: string;

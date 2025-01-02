@@ -1,6 +1,6 @@
 ﻿import { useState } from 'react';
 import { useAppDispatch } from '../../hooks/redux';
-import { addReview } from '../../store/offers/apiActions';
+import { addReview } from '../../store/offers/api-actions';
 
 interface ReviewFormProps {
   offerId: string;

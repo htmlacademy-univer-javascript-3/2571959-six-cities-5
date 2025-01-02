@@ -1,5 +1,5 @@
 ﻿import cn from 'classnames';
-import { PlaceCardCities } from '../card/place-card';
+import { PlaceCardCities } from '../card/card';
 import { memo, useState } from 'react';
 import { PlacesProps } from './types';
 import { Map } from '../map/map';

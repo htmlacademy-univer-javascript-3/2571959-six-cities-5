@@ -1,7 +1,7 @@
 ﻿import { Link } from 'react-router-dom';
 import { Header } from '../../components/header/header';
 import { buildRoute } from '../../utils/url';
-import { AppRoute } from '../../routing/routes';
+import { AppRoute } from '../../routing/routing';
 
 export function OfferNotLoggedPage() {
   return (

@@ -1,15 +1,15 @@
-﻿import { MainPage } from './pages/main/main-page';
+﻿import { MainPage } from './pages/main/main';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { LoginPage } from './pages/login/login-page';
-import { OfferPage } from './pages/offer/offer-page';
-import { FavoritesPage } from './pages/favorites/favorites-page';
-import { NotFoundPage } from './pages/not-found/not-found-page';
-import { AppRoute } from './routing/routes';
+import { LoginPage } from './pages/login/login';
+import { OfferPage } from './pages/offer/offer';
+import { FavoritesPage } from './pages/favorites/favorites';
+import { NotFoundPage } from './pages/not-found/not-found';
+import { AppRoute } from './routing/routing';
 import { PrivateRoute } from './routing/private-route';
 import { Providers } from './providers';
 import { store } from './store';
-import { checkLogin } from './store/auth/apiActions';
-import { fetchFavoriteOffers, fetchOffers } from './store/offers/apiActions';
+import { checkLogin } from './store/auth/api-actions';
+import { fetchFavoriteOffers, fetchOffers } from './store/offers/api-actions';
 
 store
   .dispatch(checkLogin())

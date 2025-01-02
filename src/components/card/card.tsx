@@ -1,11 +1,11 @@
 ﻿import { Link } from 'react-router-dom';
 import { OfferCardData } from '../../types/offer';
-import { PlaceCardBookmarkButton } from '../bookmark/bookmark-button';
+import { PlaceCardBookmarkButton } from '../bookmark/bookmark';
 import { PlaceCardStarRating } from '../star-rating/star-rating';
 import { Mark } from './mark';
 import cn from 'classnames';
 import { buildRoute } from '../../utils/url';
-import { AppRoute } from '../../routing/routes';
+import { AppRoute } from '../../routing/routing';
 import { memo } from 'react';
 
 interface PlaceCardProps {

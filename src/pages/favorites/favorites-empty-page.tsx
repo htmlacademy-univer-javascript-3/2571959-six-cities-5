@@ -1,6 +1,6 @@
 ﻿import { Link } from 'react-router-dom';
 import { Header } from '../../components/header/header';
-import { AppRoute } from '../../routing/routes';
+import { AppRoute } from '../../routing/routing';
 
 export function FavoritesEmptyPage() {
   return (

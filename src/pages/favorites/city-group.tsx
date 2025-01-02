@@ -1,4 +1,4 @@
-﻿import { PlaceCardFavorites } from '../../components/card/place-card';
+﻿import { PlaceCardFavorites } from '../../components/card/card';
 import { OfferCardData } from '../../types/offer';
 import { CityLabel } from './city-label';
 

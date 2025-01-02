@@ -1,5 +1,5 @@
 ﻿import { Outlet } from 'react-router-dom';
-import { AppRoute } from './routes';
+import { AppRoute } from './routing';
 import { Navigate } from 'react-router-dom';
 import { AuthStatus } from '../types/auth-status';
 import { useAppSelector } from '../hooks/redux';

@@ -1,9 +1,9 @@
 ﻿import cn from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { toggleFavorite } from '../../store/offers/apiActions';
+import { toggleFavorite } from '../../store/offers/api-actions';
 import { AuthStatus } from '../../types/auth-status';
 import { useNavigate } from 'react-router-dom';
-import { AppRoute } from '../../routing/routes';
+import { AppRoute } from '../../routing/routing';
 
 interface BookmarkButtonProps extends GenericBookmarkButtonProps {
   className: string;
