@@ -1,10 +1,10 @@
 ﻿import cn from 'classnames';
-import { PlaceCardCities } from '../card/place-card';
+import { PlaceCardCities } from '../card/card';
 import { memo, useState } from 'react';
 import { PlacesProps } from './types';
 import { Map } from '../map/map';
-import { sortingOrder, sorting, DEFAULT_ZOOM } from '../../utils/constants';
-import { SortingOrder } from '../sorting-order/sorting-order';
+import { sorting, DEFAULT_ZOOM, SortingOrder } from '../../utils/constants';
+import { SortingOrderSelect } from '../sorting-order/sorting-order';
 import styles from './places.module.css';
 import { PlacesEmpty } from './places-empty';
 
@@ -13,7 +13,7 @@ interface CityPlacesProps extends PlacesProps {
 }
 
 function PlacesInternal({ selectedCity, offers }: CityPlacesProps) {
-  const [order, setOrder] = useState<sortingOrder>('Price: low to high');
+  const [order, setOrder] = useState<SortingOrder>(SortingOrder.LOW_TO_HIGH);
   const [activeCard, setActiveCard] = useState<string | null>(null);
   if (offers.length === 0) {
     return <PlacesEmpty selectedCity={selectedCity} />;
@@ -30,7 +30,7 @@ function PlacesInternal({ selectedCity, offers }: CityPlacesProps) {
         <b className="places__found">
           {offers.length} places to stay in {selectedCity}
         </b>
-        <SortingOrder order={order} onChangeOrder={setOrder} />
+        <SortingOrderSelect order={order} onChangeOrder={setOrder} />
         <div
           className={cn('cities__places-list', 'places__list', 'tabs__content')}
         >

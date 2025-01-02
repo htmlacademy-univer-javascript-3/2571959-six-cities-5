@@ -1,9 +1,9 @@
 ﻿import cn from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { toggleFavorite } from '../../store/offers/apiActions';
+import { toggleFavorite } from '../../store/offers/api-actions';
 import { AuthStatus } from '../../types/auth-status';
 import { useNavigate } from 'react-router-dom';
-import { AppRoute } from '../../routing/routes';
+import { AppRoute } from '../../routing/routing';
 
 interface BookmarkButtonProps extends GenericBookmarkButtonProps {
   className: string;
@@ -42,12 +42,13 @@ function BookmarkButton({
       className={cn('button', className)}
       type="button"
       onClick={handleClick}
+      data-testid="bookmark-button"
     >
       <svg className={iconClassName} width={width} height={height}>
         <use xlinkHref="#icon-bookmark" />
       </svg>
       <span className="visually-hidden">
-        {isFavorite ? 'To bookmarks' : 'In bookmarks'}
+        {isFavorite ? 'In bookmarks' : 'To bookmarks' }
       </span>
     </button>
   );

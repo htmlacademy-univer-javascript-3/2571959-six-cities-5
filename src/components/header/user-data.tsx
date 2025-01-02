@@ -1,8 +1,8 @@
 ﻿import { Link } from 'react-router-dom';
 import cn from 'classnames';
-import { AppRoute } from '../../routing/routes';
+import { AppRoute } from '../../routing/routing';
 import { useAppDispatch } from '../../hooks/redux';
-import { logout } from '../../store/auth/apiActions';
+import { logout } from '../../store/auth/api-actions';
 
 export function UserData({
   email,

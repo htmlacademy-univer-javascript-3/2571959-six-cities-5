@@ -4,7 +4,7 @@ import { Tabs } from '../../components/tabs/tabs';
 import { Places } from '../../components/places/places';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { selectCurrentOffers } from '../../store/selectors';
-import { setCity } from '../../store/offers/offersSlice';
+import { setCity } from '../../store/offers/offers';
 import { Spinner } from '../../components/spinner/spinner';
 import { useCallback } from 'react';
 

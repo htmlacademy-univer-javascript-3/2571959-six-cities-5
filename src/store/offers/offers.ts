@@ -15,9 +15,9 @@ import {
   fetchOffer,
   fetchOffers,
   fetchReviews,
-} from './apiActions';
+} from './api-actions';
 import { Review } from '../../types/review';
-import { checkLogin, login, logout } from '../auth/apiActions';
+import { checkLogin, login, logout } from '../auth/api-actions';
 
 const offersAdapter = createEntityAdapter<OfferCardData>({
   selectId: (offer) => offer.id,

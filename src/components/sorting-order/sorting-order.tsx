@@ -1,13 +1,13 @@
 ﻿import cn from 'classnames';
-import { sortingOrder, sortingKeys } from '../../utils/constants';
+import { SortingOrder } from '../../utils/constants';
 import { useState } from 'react';
 
 interface SortingOrderProps {
-  order: string;
-  onChangeOrder: (order: sortingOrder) => void;
+  order: SortingOrder;
+  onChangeOrder: (order: SortingOrder) => void;
 }
 
-export function SortingOrder({ order, onChangeOrder }: SortingOrderProps) {
+export function SortingOrderSelect({ order, onChangeOrder }: SortingOrderProps) {
   const [opened, setOpened] = useState(false);
 
   return (
@@ -17,6 +17,7 @@ export function SortingOrder({ order, onChangeOrder }: SortingOrderProps) {
         className="places__sorting-type"
         tabIndex={0}
         onClick={() => setOpened(!opened)}
+        data-testid="sorting-button"
       >
         {order}
         <svg className="places__sorting-arrow" width={7} height={4}>
@@ -28,7 +29,7 @@ export function SortingOrder({ order, onChangeOrder }: SortingOrderProps) {
           'places__options--opened': opened,
         })}
       >
-        {sortingKeys.map((key) => (
+        {Object.values(SortingOrder).map((key) => (
           <li
             key={key}
             className={cn('places__option', {
@@ -36,9 +37,10 @@ export function SortingOrder({ order, onChangeOrder }: SortingOrderProps) {
             })}
             tabIndex={0}
             onClick={() => {
-              onChangeOrder(key as sortingOrder);
+              onChangeOrder(key as SortingOrder);
               setOpened(false);
             }}
+            data-testid={`sorting-option-${key}`}
           >
             {key}
           </li>

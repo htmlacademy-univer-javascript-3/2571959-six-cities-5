@@ -1,14 +1,14 @@
 ﻿import { Icon, layerGroup, Marker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useRef, useEffect } from 'react';
-import { useMap } from '../../hooks/useMap';
+import { useMap } from '../../hooks/hooks';
 import { City } from '../../types/city';
 
 type MapProps = {
   city: City;
   places: City[];
-  selectedCity: City | undefined;
-  className: string;
+  selectedCity?: City;
+  className?: string;
 };
 
 const defaultCustomIcon = new Icon({
@@ -59,5 +59,5 @@ export function Map(props: MapProps): JSX.Element {
     }
   }, [map, city]);
 
-  return <div className={className} ref={mapRef} />;
+  return <div className={className} ref={mapRef} data-testid="map" />;
 }

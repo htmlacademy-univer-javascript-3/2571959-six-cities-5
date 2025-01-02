@@ -21,6 +21,7 @@ function TabInternal({ city, active, onCityChange }: TabProps) {
           'tabs__item--active': active,
         })}
         onClick={() => onCityChange(city)}
+        data-testid={`tab-${city}`}
       >
         <span>{city}</span>
       </a>

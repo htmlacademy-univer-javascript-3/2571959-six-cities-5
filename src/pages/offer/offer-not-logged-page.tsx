@@ -1,13 +1,12 @@
 ﻿import { Link } from 'react-router-dom';
 import { Header } from '../../components/header/header';
-import { AuthStatus } from '../../types/auth-status';
 import { buildRoute } from '../../utils/url';
-import { AppRoute } from '../../routing/routes';
+import { AppRoute } from '../../routing/routing';
 
 export function OfferNotLoggedPage() {
   return (
     <div className="page">
-      <Header authStatus={AuthStatus.NO_AUTH} />
+      <Header />
       <main className="page__main page__main--offer">
         <section className="offer">
           <div className="offer__gallery-container container">

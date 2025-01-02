@@ -1,6 +1,6 @@
 ﻿import cn from 'classnames';
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../routing/routes';
+import { AppRoute } from '../../routing/routing';
 import { AuthStatus } from '../../types/auth-status';
 import { useAppSelector } from '../../hooks/redux';
 import { UserData, UserDataNoAuth } from './user-data';

@@ -1,8 +1,8 @@
 ﻿import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { fetchOffer, fetchNearbyOffers, fetchReviews } from '../../store/offers/apiActions';
-import { clearOffer, setCity } from '../../store/offers/offersSlice';
+import { fetchOffer, fetchNearbyOffers, fetchReviews } from '../../store/offers/api-actions';
+import { clearOffer, setCity } from '../../store/offers/offers';
 import { DEFAULT_CITY } from '../../utils/constants';
 import { selectNearbyOffers } from '../../store/selectors';
 

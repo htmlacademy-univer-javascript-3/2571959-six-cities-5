@@ -1,4 +1,4 @@
-﻿import { ReviewUserAvatar } from '../../components/user/user-avatar';
+﻿import { ReviewUserAvatar } from '../../components/user/user';
 import { Review } from '../../types/review';
 import moment from 'moment';
 
