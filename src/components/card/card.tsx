@@ -33,6 +33,7 @@ function PlaceCardInternal({
       className={cn(mainClassName, 'place-card')}
       onMouseEnter={() => onHover?.(offer.id)}
       onMouseLeave={() => onHover?.(null)}
+      data-testid="place-card"
     >
       {offer.isPremium && <Mark />}
       <div className={cn('place-card__image-wrapper', imageWrapperClassName)}>
