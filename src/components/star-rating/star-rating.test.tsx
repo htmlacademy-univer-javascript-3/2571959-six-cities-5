@@ -9,7 +9,7 @@ describe('StarRating Component', () => {
         rating={4}
         ratingClassName="test-rating"
         starsClassName="test-stars"
-        showRating={true}
+        showRating
       />
     );
     expect(container.querySelector('.test-rating')).toBeInTheDocument();

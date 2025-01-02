@@ -2,7 +2,6 @@ import {
   render,
   screen,
   fireEvent,
-  getAllByText,
 } from '@testing-library/react';
 import { SortingOrderSelect } from './sorting-order';
 import { SortingOrder } from '../../utils/constants';
