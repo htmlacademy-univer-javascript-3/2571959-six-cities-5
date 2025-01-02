@@ -17,6 +17,7 @@ export function SortingOrderSelect({ order, onChangeOrder }: SortingOrderProps) 
         className="places__sorting-type"
         tabIndex={0}
         onClick={() => setOpened(!opened)}
+        data-testid="sorting-button"
       >
         {order}
         <svg className="places__sorting-arrow" width={7} height={4}>
@@ -39,6 +40,7 @@ export function SortingOrderSelect({ order, onChangeOrder }: SortingOrderProps) 
               onChangeOrder(key as SortingOrder);
               setOpened(false);
             }}
+            data-testid={`sorting-option-${key}`}
           >
             {key}
           </li>
