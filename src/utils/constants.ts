@@ -1,23 +1,19 @@
 ﻿import { OfferCardData } from '../types/offer';
 
-const sortingOrders = {
-  'Price: low to high': 1,
-  'Price: high to low': 2,
-  'Top rated first': 3,
-};
-
-export type sortingOrder = keyof typeof sortingOrders;
+export enum SortingOrder {
+  LOW_TO_HIGH = 'Price: low to high',
+  HIGH_TO_LOW = 'Price: high to low',
+  TOP_RATED_FIRST = 'Top rated first',
+}
 
 export const sorting: Record<
-  sortingOrder,
+  SortingOrder,
   (a: OfferCardData, b: OfferCardData) => number
 > = {
-  'Price: low to high': (a, b) => a.price - b.price,
-  'Price: high to low': (a, b) => b.price - a.price,
-  'Top rated first': (a, b) => b.rating - a.rating,
+  [SortingOrder.LOW_TO_HIGH]: (a, b) => a.price - b.price,
+  [SortingOrder.HIGH_TO_LOW]: (a, b) => b.price - a.price,
+  [SortingOrder.TOP_RATED_FIRST]: (a, b) => b.rating - a.rating,
 };
-
-export const sortingKeys = Object.keys(sortingOrders);
 
 export const DEFAULT_CITY = 'Amsterdam';
 
