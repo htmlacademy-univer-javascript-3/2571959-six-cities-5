@@ -42,12 +42,13 @@ function BookmarkButton({
       className={cn('button', className)}
       type="button"
       onClick={handleClick}
+      data-testid="bookmark-button"
     >
       <svg className={iconClassName} width={width} height={height}>
         <use xlinkHref="#icon-bookmark" />
       </svg>
       <span className="visually-hidden">
-        {isFavorite ? 'To bookmarks' : 'In bookmarks'}
+        {isFavorite ? 'In bookmarks' : 'To bookmarks' }
       </span>
     </button>
   );
