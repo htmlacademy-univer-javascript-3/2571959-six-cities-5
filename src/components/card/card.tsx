@@ -27,7 +27,7 @@ function PlaceCardInternal({
   infoClassName,
   onHover,
 }: PlaceCardProps) {
-  const offerRoute = buildRoute(AppRoute.OFFER, { id: offer.id });
+  const offerRoute = buildRoute(AppRoute.Offer, { id: offer.id });
   return (
     <article
       className={cn(mainClassName, 'place-card')}

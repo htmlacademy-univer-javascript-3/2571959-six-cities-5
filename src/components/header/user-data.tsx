@@ -22,7 +22,7 @@ export function UserData({
       <li className={cn('header__nav-item', 'user')}>
         <Link
           className={cn('header__nav-link', 'header__nav-link--profile')}
-          to={AppRoute.FAVORITES}
+          to={AppRoute.Favorites}
         >
           <div
             className={cn('header__avatar-wrapper', 'user__avatar-wrapper')}
@@ -32,7 +32,7 @@ export function UserData({
         </Link>
       </li>
       <li className="header__nav-item">
-        <Link className="header__nav-link" to={AppRoute.LOGIN} onClick={handleLogout}>
+        <Link className="header__nav-link" to={AppRoute.Login} onClick={handleLogout}>
           <span className="header__signout">Sign out</span>
         </Link>
       </li>
@@ -46,7 +46,7 @@ export function UserDataNoAuth() {
       <li className="header__nav-item user">
         <Link
           className="header__nav-link header__nav-link--profile"
-          to={AppRoute.LOGIN}
+          to={AppRoute.Login}
         >
           <div className="header__avatar-wrapper user__avatar-wrapper" />
           <span className="header__login">Sign in</span>

@@ -50,7 +50,7 @@ export function FavoritesPage() {
         </div>
       </main>
       <footer className="footer container">
-        <Link to={AppRoute.ROOT} className="footer__logo-link">
+        <Link to={AppRoute.Root} className="footer__logo-link">
           <img
             className="footer__logo"
             src="img/logo.svg"

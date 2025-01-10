@@ -24,9 +24,9 @@ export function LoginPage() {
   };
 
   useEffect(() => {
-    if (authStatus === AuthStatus.AUTH) {
+    if (authStatus === AuthStatus.Auth) {
       dispatch(fetchFavoriteOffers());
-      navigate(AppRoute.ROOT);
+      navigate(AppRoute.Root);
     }
   }, [authStatus, dispatch, navigate]);
 
@@ -83,7 +83,7 @@ export function LoginPage() {
             <div className="locations__item">
               <Link
                 className="locations__item-link"
-                to={AppRoute.ROOT}
+                to={AppRoute.Root}
                 onClick={handleCityClick}
               >
                 <span>{city}</span>

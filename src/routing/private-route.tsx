@@ -6,6 +6,6 @@ import { useAppSelector } from '../hooks/redux';
 
 export function PrivateRoute() {
   const authStatus = useAppSelector((state) => state.auth.authStatus);
-  const isAuth = authStatus === AuthStatus.AUTH;
-  return isAuth ? <Outlet /> : <Navigate to={AppRoute.LOGIN} />;
+  const isAuth = authStatus === AuthStatus.Auth;
+  return isAuth ? <Outlet /> : <Navigate to={AppRoute.Login} />;
 }

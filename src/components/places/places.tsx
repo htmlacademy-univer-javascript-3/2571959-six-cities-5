@@ -13,7 +13,7 @@ interface CityPlacesProps extends PlacesProps {
 }
 
 function PlacesInternal({ selectedCity, offers }: CityPlacesProps) {
-  const [order, setOrder] = useState<SortingOrder>(SortingOrder.LOW_TO_HIGH);
+  const [order, setOrder] = useState<SortingOrder>(SortingOrder.LowToHigh);
   const [activeCard, setActiveCard] = useState<string | null>(null);
   if (offers.length === 0) {
     return <PlacesEmpty selectedCity={selectedCity} />;

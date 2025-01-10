@@ -29,8 +29,8 @@ function BookmarkButton({
   const navigate = useNavigate();
   const authStatus = useAppSelector((state) => state.auth.authStatus);
   const handleClick = () => {
-    if (authStatus !== AuthStatus.AUTH) {
-      navigate(AppRoute.LOGIN);
+    if (authStatus !== AuthStatus.Auth) {
+      navigate(AppRoute.Login);
       return;
     }
     dispatch(

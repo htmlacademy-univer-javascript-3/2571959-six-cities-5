@@ -10,7 +10,7 @@ describe('Component: PlaceCardFavorites', () => {
   const mockOffer = generateOffer();
 
   it('should render PlaceCardFavorites with correct information', () => {
-    const { withStoreComponent } = withStore(<PlaceCardFavorites offer={mockOffer} />, { auth: { authStatus: AuthStatus.AUTH } });
+    const { withStoreComponent } = withStore(<PlaceCardFavorites offer={mockOffer} />, { auth: { authStatus: AuthStatus.Auth } });
     const preparedComponent = withHistory(withStoreComponent);
 
     render(preparedComponent);
@@ -23,7 +23,7 @@ describe('Component: PlaceCardFavorites', () => {
 
   it('should render Premium mark when offer isPremium', () => {
     const premiumOffer = { ...mockOffer, isPremium: true };
-    const { withStoreComponent } = withStore(<PlaceCardFavorites offer={premiumOffer} />, { auth: { authStatus: AuthStatus.AUTH } });
+    const { withStoreComponent } = withStore(<PlaceCardFavorites offer={premiumOffer} />, { auth: { authStatus: AuthStatus.Auth } });
     const preparedComponent = withHistory(withStoreComponent);
     render(preparedComponent);
 
@@ -35,7 +35,7 @@ describe('Component: PlaceCardCities', () => {
   const mockOffer = generateOffer();
 
   it('should render PlaceCardCities with correct information', () => {
-    const { withStoreComponent } = withStore(<PlaceCardCities offer={mockOffer} />, { auth: { authStatus: AuthStatus.AUTH } });
+    const { withStoreComponent } = withStore(<PlaceCardCities offer={mockOffer} />, { auth: { authStatus: AuthStatus.Auth } });
     const preparedComponent = withHistory(withStoreComponent);
 
     render(preparedComponent);
@@ -48,7 +48,7 @@ describe('Component: PlaceCardCities', () => {
 
   it('should call onHover callback when mouse enters and leaves', async () => {
     const mockHoverCallback = vi.fn();
-    const { withStoreComponent } = withStore(<PlaceCardCities offer={mockOffer} onHover={mockHoverCallback} />, { auth: { authStatus: AuthStatus.AUTH } });
+    const { withStoreComponent } = withStore(<PlaceCardCities offer={mockOffer} onHover={mockHoverCallback} />, { auth: { authStatus: AuthStatus.Auth } });
     const preparedComponent = withHistory(withStoreComponent);
     render(preparedComponent);
 
@@ -64,7 +64,7 @@ describe('Component: PlaceCardCities', () => {
 
   it('should render Premium mark when offer isPremium', () => {
     const premiumOffer = { ...mockOffer, isPremium: true };
-    const { withStoreComponent } = withStore(<PlaceCardCities offer={premiumOffer} />, { auth: { authStatus: AuthStatus.AUTH } });
+    const { withStoreComponent } = withStore(<PlaceCardCities offer={premiumOffer} />, { auth: { authStatus: AuthStatus.Auth } });
     const preparedComponent = withHistory(withStoreComponent);
     render(preparedComponent);
 
@@ -76,7 +76,7 @@ describe('Component: PlaceCardNear', () => {
   const mockOffer = generateOffer();
 
   it('should render PlaceCardNear with correct information', () => {
-    const { withStoreComponent } = withStore(<PlaceCardNear offer={mockOffer} />, { auth: { authStatus: AuthStatus.AUTH } });
+    const { withStoreComponent } = withStore(<PlaceCardNear offer={mockOffer} />, { auth: { authStatus: AuthStatus.Auth } });
     const preparedComponent = withHistory(withStoreComponent);
 
     render(preparedComponent);
@@ -89,7 +89,7 @@ describe('Component: PlaceCardNear', () => {
 
   it('should call onHover callback when mouse enters and leaves', async () => {
     const mockHoverCallback = vi.fn();
-    const { withStoreComponent } = withStore(<PlaceCardNear offer={mockOffer} onHover={mockHoverCallback} />, { auth: { authStatus: AuthStatus.AUTH } });
+    const { withStoreComponent } = withStore(<PlaceCardNear offer={mockOffer} onHover={mockHoverCallback} />, { auth: { authStatus: AuthStatus.Auth } });
     const preparedComponent = withHistory(withStoreComponent);
     render(preparedComponent);
 
@@ -105,7 +105,7 @@ describe('Component: PlaceCardNear', () => {
 
   it('should render Premium mark when offer isPremium', () => {
     const premiumOffer = { ...mockOffer, isPremium: true };
-    const { withStoreComponent } = withStore(<PlaceCardNear offer={premiumOffer} />, { auth: { authStatus: AuthStatus.AUTH } });
+    const { withStoreComponent } = withStore(<PlaceCardNear offer={premiumOffer} />, { auth: { authStatus: AuthStatus.Auth } });
     const preparedComponent = withHistory(withStoreComponent);
     render(preparedComponent);
 

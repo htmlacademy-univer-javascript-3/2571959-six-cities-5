@@ -24,11 +24,11 @@ store
 export function App() {
   return (
     <Routes>
-      <Route path={AppRoute.ROOT} element={<MainPage />} />
-      <Route path={AppRoute.LOGIN} element={<LoginPage />} />
-      <Route path={AppRoute.OFFER} element={<OfferPage />} />
+      <Route path={AppRoute.Root} element={<MainPage />} />
+      <Route path={AppRoute.Login} element={<LoginPage />} />
+      <Route path={AppRoute.Offer} element={<OfferPage />} />
       <Route element={<PrivateRoute />}>
-        <Route path={AppRoute.FAVORITES} element={<FavoritesPage />} />
+        <Route path={AppRoute.Favorites} element={<FavoritesPage />} />
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
