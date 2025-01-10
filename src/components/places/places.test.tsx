@@ -12,7 +12,7 @@ describe('Component: Places', () => {
   it('should render all offers in the list', () => {
     const { withStoreComponent } = withStore(
       <Places selectedCity={selectedCity} offers={mockOffers} />,
-      { auth: { authStatus: AuthStatus.AUTH } }
+      { auth: { authStatus: AuthStatus.Auth } }
     );
     const preparedComponent = withHistory(withStoreComponent);
     render(preparedComponent);
@@ -38,17 +38,17 @@ describe('Component: Places', () => {
   it('should change sorting order', () => {
     const { withStoreComponent } = withStore(
       <Places selectedCity={selectedCity} offers={mockOffers} />,
-      { auth: { authStatus: AuthStatus.AUTH } }
+      { auth: { authStatus: AuthStatus.Auth } }
     );
     const preparedComponent = withHistory(withStoreComponent);
     const { getByTestId, rerender } = render(preparedComponent);
 
     let sortingButton = getByTestId('sorting-button');
     sortingButton.click();
-    getByTestId(`sorting-option-${SortingOrder.HIGH_TO_LOW}`).click();
+    getByTestId(`sorting-option-${SortingOrder.HighToLow}`).click();
     rerender(preparedComponent);
     sortingButton = getByTestId('sorting-button');
 
-    expect(sortingButton).toHaveTextContent(SortingOrder.HIGH_TO_LOW);
+    expect(sortingButton).toHaveTextContent(SortingOrder.HighToLow);
   });
 });

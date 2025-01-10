@@ -1,7 +1,7 @@
 ﻿
 export enum AppRoute {
-  LOGIN = '/login',
-  OFFER = '/offer/:id',
-  FAVORITES = '/favorites',
-  ROOT = '/',
+  Login = '/login',
+  Offer = '/offer/:id',
+  Favorites = '/favorites',
+  Root = '/',
 }

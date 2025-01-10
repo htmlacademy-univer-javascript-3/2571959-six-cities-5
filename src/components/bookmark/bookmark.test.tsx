@@ -9,7 +9,7 @@ import { AuthStatus } from '../../types/auth-status';
 
 describe('Component: BookmarkButton', () => {
   const buttonId = 'bookmark-button';
-  const defaultStore = { auth: { authStatus: AuthStatus.AUTH } };
+  const defaultStore = { auth: { authStatus: AuthStatus.Auth } };
 
   it('should render BookmarkButton with correct text when isFavorite is false', async () => {
     const { withStoreComponent } = withStore(
@@ -67,7 +67,7 @@ describe('Component: BookmarkButton', () => {
     const isFavorite = false;
     const { withStoreComponent } = withStore(
       <PlaceCardBookmarkButton offerId={offerId} isFavorite={isFavorite} />,
-      { auth: { authStatus: AuthStatus.NO_AUTH } }
+      { auth: { authStatus: AuthStatus.NoAuth } }
     );
     const history = createMemoryHistory();
     const preparedComponent = withHistory(withStoreComponent, history);
@@ -76,6 +76,6 @@ describe('Component: BookmarkButton', () => {
 
     await userEvent.click(screen.getByTestId(buttonId));
 
-    expect(history.location.pathname).toEqual(AppRoute.LOGIN);
+    expect(history.location.pathname).toEqual(AppRoute.Login);
   });
 });

@@ -4,7 +4,7 @@ import { AuthStatus } from '../../types/auth-status';
 import { generateUser, withHistory, withStore } from '../../mocks';
 
 const defaultState = {
-  auth: { user: generateUser(), authStatus: AuthStatus.NO_AUTH },
+  auth: { user: generateUser(), authStatus: AuthStatus.NoAuth },
   offers: {
     cards: { all: { ids: [], entities: {} }, nearbyIds: [] },
     loading: false,
@@ -28,7 +28,7 @@ describe('Header component', () => {
   it('should render user data when authenticated', () => {
     const { withStoreComponent } = withStore(withHistory(<Header />), {
       ...defaultState,
-      auth: { ...defaultState.auth, authStatus: AuthStatus.AUTH },
+      auth: { ...defaultState.auth, authStatus: AuthStatus.Auth },
     });
 
     render(withStoreComponent);

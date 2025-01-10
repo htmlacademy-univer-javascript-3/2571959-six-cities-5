@@ -10,7 +10,7 @@ interface AuthState {
 }
 
 const initialState = {
-  authStatus: AuthStatus.UNKNOWN,
+  authStatus: AuthStatus.Unknown,
 } as AuthState;
 
 export const authReducer = createReducer(initialState, (builder) =>
@@ -20,14 +20,14 @@ export const authReducer = createReducer(initialState, (builder) =>
       (state, action) => {
         const user = action.payload;
         state.user = user;
-        state.authStatus = AuthStatus.AUTH;
+        state.authStatus = AuthStatus.Auth;
         saveToken(user.token);
       }
     )
     .addMatcher(
       isAnyOf(login.rejected, checkLogin.rejected, logout.fulfilled),
       (state) => {
-        state.authStatus = AuthStatus.NO_AUTH;
+        state.authStatus = AuthStatus.NoAuth;
         state.user = undefined;
         dropToken();
       }

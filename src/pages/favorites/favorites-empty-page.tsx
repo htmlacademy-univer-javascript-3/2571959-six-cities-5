@@ -20,7 +20,7 @@ export function FavoritesEmptyPage() {
         </div>
       </main>
       <footer className="footer">
-        <Link className="footer__logo-link" to={AppRoute.ROOT}>
+        <Link className="footer__logo-link" to={AppRoute.Root}>
           <img
             className="footer__logo"
             src="img/logo.svg"

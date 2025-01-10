@@ -12,12 +12,12 @@ describe('SortingOrderSelect', () => {
   it('should render correctly', () => {
     const { getByText, getAllByText } = render(
       <SortingOrderSelect
-        order={SortingOrder.TOP_RATED_FIRST}
+        order={SortingOrder.TopRatedFirst}
         onChangeOrder={mockOnChangeOrder}
       />
     );
     expect(getByText('Sort by')).toBeInTheDocument();
-    getAllByText(SortingOrder.TOP_RATED_FIRST).forEach((element) => {
+    getAllByText(SortingOrder.TopRatedFirst).forEach((element) => {
       expect(element).toBeInTheDocument();
     });
   });
@@ -25,7 +25,7 @@ describe('SortingOrderSelect', () => {
   it('should open and close options list when clicked', () => {
     render(
       <SortingOrderSelect
-        order={SortingOrder.TOP_RATED_FIRST}
+        order={SortingOrder.TopRatedFirst}
         onChangeOrder={mockOnChangeOrder}
       />
     );
@@ -39,30 +39,30 @@ describe('SortingOrderSelect', () => {
   it('should call onChangeOrder with correct order when an option is clicked', () => {
     render(
       <SortingOrderSelect
-        order={SortingOrder.TOP_RATED_FIRST}
+        order={SortingOrder.TopRatedFirst}
         onChangeOrder={mockOnChangeOrder}
       />
     );
     const sortingButton = screen.getByTestId('sorting-button');
     fireEvent.click(sortingButton);
     const option = screen.getByTestId(
-      `sorting-option-${SortingOrder.LOW_TO_HIGH}`
+      `sorting-option-${SortingOrder.LowToHigh}`
     );
     fireEvent.click(option);
-    expect(mockOnChangeOrder).toHaveBeenCalledWith(SortingOrder.LOW_TO_HIGH);
+    expect(mockOnChangeOrder).toHaveBeenCalledWith(SortingOrder.LowToHigh);
   });
 
   it('should close options list when an option is clicked', () => {
     render(
       <SortingOrderSelect
-        order={SortingOrder.TOP_RATED_FIRST}
+        order={SortingOrder.TopRatedFirst}
         onChangeOrder={mockOnChangeOrder}
       />
     );
     const sortingButton = screen.getByTestId('sorting-button');
     fireEvent.click(sortingButton);
     const option = screen.getByTestId(
-      `sorting-option-${SortingOrder.LOW_TO_HIGH}`
+      `sorting-option-${SortingOrder.LowToHigh}`
     );
     fireEvent.click(option);
     expect(screen.getByRole('list')).not.toHaveClass('places__options--opened');
@@ -71,14 +71,14 @@ describe('SortingOrderSelect', () => {
   it('should highlight the active sorting option', () => {
     render(
       <SortingOrderSelect
-        order={SortingOrder.TOP_RATED_FIRST}
+        order={SortingOrder.TopRatedFirst}
         onChangeOrder={mockOnChangeOrder}
       />
     );
     const sortingButton = screen.getByTestId('sorting-button');
     fireEvent.click(sortingButton);
     const activeOption = screen.getByTestId(
-      `sorting-option-${SortingOrder.TOP_RATED_FIRST}`
+      `sorting-option-${SortingOrder.TopRatedFirst}`
     );
     expect(activeOption).toHaveClass('places__option--active');
   });

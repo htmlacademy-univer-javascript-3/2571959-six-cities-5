@@ -13,7 +13,7 @@ interface HeaderProps {
 
 function HeaderInternal({ showUserMenu = true }: HeaderProps) {
   const { user, authStatus } = useAppSelector((state) => state.auth);
-  const isAuth = authStatus === AuthStatus.AUTH;
+  const isAuth = authStatus === AuthStatus.Auth;
   const favoriteCount = useAppSelector(selectFavoriteOffers).length;
   return (
     <header className="header">
@@ -21,7 +21,7 @@ function HeaderInternal({ showUserMenu = true }: HeaderProps) {
         <div className="header__wrapper">
           <div className="header__left">
             <Link
-              to={AppRoute.ROOT}
+              to={AppRoute.Root}
               className={cn('header__logo-link', 'header__logo-link--active')}
             >
               <img
